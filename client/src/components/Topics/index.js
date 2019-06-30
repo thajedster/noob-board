@@ -10,9 +10,9 @@ function Topics(props) {
             <div className="top-topics">
                 <ul>
                     {props.post.map(item => (
-                        <p key={item.id}>
+                        <div key={item.id}>
                             <h3>{item.title}</h3><br /><br />{item.body}<hr />
-                        </p>
+                        </div>
                     ))}
                 </ul>
 
