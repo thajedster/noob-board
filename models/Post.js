@@ -1,19 +1,22 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const PostSchema = new Schema({
+const PostSchema = new Schema(
+  {
     title: {
-        type: String,
-        trim: true,
-        required: "title is required"
+      type: String,
+      trim: true,
+      required: "title is required"
     },
     body: {
-        type: String,
-        trim: true,
-        required: "body is required"
+      type: String,
+      trim: true,
+      required: "body is required"
     }
-});
+  },
+  { timestamps: true }
+);
 
 const Post = mongoose.model("Post", PostSchema);
 
