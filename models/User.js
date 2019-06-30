@@ -33,7 +33,19 @@ const UserSchema = new Schema(
       type: String,
       trim: true,
       required: "lastName is required"
-    }
+    },
+    posts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post"
+      }
+    ],
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment"
+      }
+    ]
   },
   { timestamps: true }
 );

@@ -13,7 +13,17 @@ const PostSchema = new Schema(
       type: String,
       trim: true,
       required: "body is required"
-    }
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment"
+      }
+    ]
   },
   { timestamps: true }
 );
