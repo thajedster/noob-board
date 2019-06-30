@@ -11,10 +11,12 @@ const CommentSchema = new Schema(
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
+      require: true,
       ref: "User"
     },
     post: {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: "Post"
     }
   },
