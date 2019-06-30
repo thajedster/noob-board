@@ -16,6 +16,8 @@ exports.findAll = (req, res) => {
 
 exports.findById = (req, res) => {
   Post.findById(req.params.id)
+    .populate("author")
+    .populate("comments")
     .then(data => {
       if (!data) {
         res.status(404).end();
