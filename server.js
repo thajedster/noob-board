@@ -1,6 +1,5 @@
 const express = require("express");
-const axios = require('axios');
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -21,9 +20,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("public"));
 }
 
-// TODO: require routes here
-// require("./routes/htmlRoutes")(app);   //sample
-
+require("./routes/api-routes")(app);
 
 // Send every request to the React app
 // Define any API routes before this runs
