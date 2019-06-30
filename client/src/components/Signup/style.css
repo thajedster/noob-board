@@ -1,0 +1,13 @@
+#sign{
+    float: left;
+    width:100%;
+    background-color: #7e7e7e;
+}
+
+h2{
+    float:left;
+}
+
+form{
+    float: right;
+}
