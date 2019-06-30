@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { Navbar } from './components/Navbar'
+import { Navbar } from './components/Navbar';
+import { Topics } from './components/Topics';
 
 class App extends React.Component {
   state = {
@@ -11,6 +12,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar />
+        <Topics />
       </div>
     );
   }
