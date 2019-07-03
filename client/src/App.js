@@ -1,8 +1,10 @@
-import React from 'react';
-import './App.css';
-import { Navbar } from './components/Navbar';
-import Topics from './components/Topics';
-import Signup from './components/Signup';
+import React from "react";
+import "./App.css";
+import { Navbar } from "./components/Navbar";
+import Topics from "./components/Topics";
+import Signup from "./components/Signup";
+import Form from "./components/Form";
+import FormContainer from "./Containers/FormContainer";
 
 const posts = [
   {
@@ -20,12 +22,12 @@ const posts = [
     title: "react props",
     body: "awe iuf aosdio  iudfo iasdfi chifld asoidf"
   }
-]
+];
 
 class App extends React.Component {
   state = {
     topics: { post: posts }
-  }
+  };
 
   render() {
     return (
@@ -33,6 +35,7 @@ class App extends React.Component {
         <Navbar />
         <Topics post={this.state.topics.post} />
         <Signup />
+        <FormContainer />
       </div>
     );
   }
