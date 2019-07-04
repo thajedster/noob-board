@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
+const logger = require("morgan");
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -15,6 +16,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(logger("common"));
 
 // passport configuration
 require("./config/passport")(passport); 
@@ -63,7 +65,9 @@ require("./routes/api-routes")(app);
 require("./routes/html-routes")(app, loggedin);
 require("./routes/auth")(app, passport);
 
-
+// Create admin account
+const createAdminAccount = require("./admin");
+createAdminAccount();
 
 // Send every request to the React app
 // Define any API routes before this runs
