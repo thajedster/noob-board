@@ -16,6 +16,8 @@ exports.findAll = (req, res) => {
 
 exports.findByName = (req, res) => {
   User.findOne({ userName: req.query.userName })
+    .populate("posts")
+    .populate("comments")
     .then(data => {
       if (!data) {
         res.status(404).end();
@@ -34,6 +36,8 @@ exports.findByName = (req, res) => {
 
 exports.findById = (req, res) => {
   User.findById(req.params.id)
+    .populate("posts")
+    .populate("comments")
     .then(data => {
       if (!data) {
         res.status(404).end();
