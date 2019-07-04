@@ -16,6 +16,10 @@ function Signup() {
                     <input type="text" name="username" />
                     </label><br />
                     <label>
+                        E-mail:
+                    <input type="text" name="email" />
+                    </label><br />
+                    <label>
                         Password:
                     <input type="password" name="password" />
                     </label><br />
