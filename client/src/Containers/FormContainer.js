@@ -183,5 +183,7 @@ class FormContainer extends Component {
     );
   }
 }
-
+const buttonStyle = {
+  margin: "10px 10px 10px 10px"
+};
 export default FormContainer;
