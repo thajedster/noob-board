@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt-nodejs");
 
 const Schema = mongoose.Schema;
 
@@ -34,8 +35,28 @@ const UserSchema = new Schema(
       required: "lastName is required"
     }
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
+
+UserSchema.methods.hashPassword = password => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+};
+
+UserSchema.methods.comparePassword = (password, hash) => {
+  return bcrypt.compareSync(password, hash);
+};
+
+UserSchema.virtual("posts", {
+  ref: "Post",
+  localField: "_id",
+  foreignField: "author"
+});
+
+UserSchema.virtual("comments", {
+  ref: "Comment",
+  localField: "_id",
+  foreignField: "author"
+});
 
 const User = mongoose.model("User", UserSchema);
 
