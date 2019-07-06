@@ -1,6 +1,8 @@
 import React from 'react';
 import './style.css';
 import axios from 'axios'; 
+import logo from '../Navbar/noob-logo.png';
+
 
 class Bio extends React.Component {
     state = {
@@ -35,7 +37,7 @@ class Bio extends React.Component {
         return (
             <div className="bio">
                 <div className="card">
-                    <img src="noob-logo.png" className="card-img-top" alt="..." />
+                    <img src={logo} className="card-img-top" alt='logo'/>
                 <div className="card-body">
                     <p className="card-text">Name:{this.state.name}</p>
                     <p className="card-text">User Name:{this.state.userName}</p>
@@ -47,7 +49,6 @@ class Bio extends React.Component {
     }
     
 }
-
 
 export default Bio;
 

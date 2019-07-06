@@ -1,0 +1,6 @@
+.card > img {
+    width:8rem;
+    height:8rem;
+    display: flex;
+    flex-wrap: wrap; 
+}
