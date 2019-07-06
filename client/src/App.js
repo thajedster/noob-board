@@ -3,6 +3,7 @@ import './App.css';
 import { Navbar } from './components/Navbar';
 import Topics from './components/Topics';
 import Signup from './components/Signup';
+import Bio from './components/Bio';
 
 const posts = [
   {
@@ -33,6 +34,7 @@ class App extends React.Component {
         <Navbar />
         <Topics post={this.state.topics.post} />
         <Signup />
+        <Bio />
       </div>
     );
   }

@@ -2,14 +2,30 @@ import React from 'react';
 import './style.css';
 import axios from 'axios'; 
 
-class Bio extends React.Component() {
+class Bio extends React.Component {
+    state = {
+        name:"",
+        userName: "",
+        email: ""
+    }
 
     componentWillMount(){
-        axios.get().then(
+        axios.get("/api/user").then(
             function(response) {
-              console.log("Name: " + response.firstName + response.lastName);
-              console.log("User Name: " + response.userName);
-              console.log("Email: " + response.email);
+            
+                const name = response.data.firstName + response.data.lastName 
+                this.setState({name}); 
+
+                const userName = response.data.userName
+                this.setState({userName}); 
+
+                const email = response.data.email
+                this.setState({email}); 
+        
+
+              console.log("Name: " + response.data.firstName + response.data.lastName);
+              console.log("User Name: " + response.data.userName);
+              console.log("Email: " + response.data.email);
             }
         );
     };
@@ -18,12 +34,12 @@ class Bio extends React.Component() {
     render(){
         return (
             <div className="bio">
-                <div class="card" style="width: 18rem;">
-                    <img src="noob-logo.png" class="card-img-top" alt="..." />
-                <div class="card-body">
-                    <p class="card-text">Name:{}</p>
-                    <p class="card-text">User Name:{}</p>
-                    <p class="card-text">Email:{}</p>
+                <div className="card">
+                    <img src="noob-logo.png" className="card-img-top" alt="..." />
+                <div className="card-body">
+                    <p className="card-text">Name:{this.state.name}</p>
+                    <p className="card-text">User Name:{this.state.userName}</p>
+                    <p className="card-text">Email:{this.state.email}</p>
                 </div>
                 </div>
             </div>
