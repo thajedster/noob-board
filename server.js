@@ -7,9 +7,6 @@ const logger = require("morgan");
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 const app = express();
-const cors = require('cors');
-
-app.use(cors());
 
 const db = require("./models");
 // connect to the mongodb installation

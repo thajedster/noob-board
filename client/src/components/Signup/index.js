@@ -32,6 +32,17 @@ class Signup extends React.Component {
             .then(function (res) {
                 console.log("new user created")
             })
+            .catch(function (err) {
+                if (err) throw err
+            })
+
+        this.setState({
+            email: "",
+            password: "",
+            userName: "",
+            firstName: "",
+            lastName: ""
+        })
     }
 
     render() {
@@ -39,7 +50,7 @@ class Signup extends React.Component {
             <div className="jumbotron jumbotron-fluid" id="sign">
                 <div className="container">
                     <h2 className="display-4">Sign Up Now!</h2>
-                    <form>
+                    <form className="userForm">
                         <label>
                             First Name:
                     <input type="text" name="firstName" onChange={this.handleChange} value={this.state.firstName} />
