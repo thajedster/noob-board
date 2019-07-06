@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
+import './App.css';
 import { Navbar } from "./components/Navbar";
 import Topics from "./components/Topics";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import Bio from "./components/Bio";
 
 const posts = [
   {
@@ -36,6 +37,7 @@ class App extends Component {
           <Topics post={this.state.topics.post} />
           <Signup />
           <Login />
+          <Bio />
         </div>
       </div>
     );
