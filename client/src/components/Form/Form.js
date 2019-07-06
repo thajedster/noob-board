@@ -7,6 +7,17 @@ class Form extends Component {
     Question: ""
   };
 
+  // need to check this out
+  componentDidMount() {
+    this.loadQuestions();
+  }
+
+  loadQuestion = () => {
+    API.getQuestion()
+      .then(res => this.setState({ user: res.data }))
+      .catch(err => console.log(err));
+  };
+
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     const { name, value } = event.target;

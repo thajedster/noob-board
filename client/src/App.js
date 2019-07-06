@@ -4,7 +4,6 @@ import { Navbar } from "./components/Navbar";
 import Topics from "./components/Topics";
 import Signup from "./components/Signup";
 import Form from "./components/Form";
-import FormContainer from "./Containers/FormContainer";
 
 const posts = [
   {
@@ -35,7 +34,7 @@ class App extends React.Component {
         <Navbar />
         <Topics post={this.state.topics.post} />
         <Signup />
-        <FormContainer />
+        <Form />
       </div>
     );
   }
