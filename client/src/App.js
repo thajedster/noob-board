@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from "react";
 import './App.css';
-import { Navbar } from './components/Navbar';
-import Topics from './components/Topics';
-import Signup from './components/Signup';
-import Bio from './components/Bio';
+import { Navbar } from "./components/Navbar";
+import Topics from "./components/Topics";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import Bio from "./components/Bio";
 
 const posts = [
   {
@@ -21,20 +22,23 @@ const posts = [
     title: "react props",
     body: "awe iuf aosdio  iudfo iasdfi chifld asoidf"
   }
-]
+];
 
-class App extends React.Component {
+class App extends Component {
   state = {
     topics: { post: posts }
-  }
+  };
 
   render() {
     return (
       <div className="App">
         <Navbar />
-        <Topics post={this.state.topics.post} />
-        <Signup />
-        <Bio />
+        <div className="container-fluid">
+          <Topics post={this.state.topics.post} />
+          <Signup />
+          <Login />
+          <Bio />
+        </div>
       </div>
     );
   }
