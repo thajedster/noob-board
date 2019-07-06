@@ -16,6 +16,7 @@ const App = () => {
           <Route path="/" exact component={TopicsContainer} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
+          <Route path="/profile" component={Bio} />
         </div>
       </div>
     </BrowserRouter>
