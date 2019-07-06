@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import './App.css';
+import { BrowserRouter, Route } from "react-router-dom";
+import "./App.css";
 import { Navbar } from "./components/Navbar";
 import Topics from "./components/Topics";
 import Signup from "./components/Signup";
@@ -31,15 +32,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Navbar />
-        <div className="container-fluid">
-          <Topics post={this.state.topics.post} />
-          <Signup />
-          <Login />
-          <Bio />
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <div className="container-fluid">
+            <Topics post={this.state.topics.post} />
+            {/*<Route path="/" exact component={Topics} />*/}
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }
