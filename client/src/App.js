@@ -1,8 +1,9 @@
-import React from 'react';
-import './App.css';
-import { Navbar } from './components/Navbar';
-import Topics from './components/Topics';
-import Signup from './components/Signup';
+import React, { Component } from "react";
+import "./App.css";
+import { Navbar } from "./components/Navbar";
+import Topics from "./components/Topics";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 
 const posts = [
   {
@@ -20,19 +21,22 @@ const posts = [
     title: "react props",
     body: "awe iuf aosdio  iudfo iasdfi chifld asoidf"
   }
-]
+];
 
-class App extends React.Component {
+class App extends Component {
   state = {
     topics: { post: posts }
-  }
+  };
 
   render() {
     return (
       <div className="App">
         <Navbar />
-        <Topics post={this.state.topics.post} />
-        <Signup />
+        <div className="container-fluid">
+          <Topics post={this.state.topics.post} />
+          <Signup />
+          <Login />
+        </div>
       </div>
     );
   }
