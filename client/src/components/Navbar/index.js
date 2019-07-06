@@ -5,11 +5,11 @@ import logo from "../Navbar/noob-logo.png";
 
 const Navbar = () => {
   return (
-    <div className="navbar">
+    <nav className="navbar navbar-expand-sm">
       <Link to="/" className="navbar-brand">
         <img src={logo} alt={"logo"} />
       </Link>
-      <ul className="navbar-nav">
+      <ul className="navbar-nav mr-auto">
         <li className="nav-item">
           <Link to="/" className="nav-link">
             Home
@@ -19,13 +19,15 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
-      <Link to="/signup">
-        <button className="btn btn-primary">Sign Up</button>
-      </Link>
-      <Link to="/login">
-        <button className="btn btn-primary">Sign In</button>
-      </Link>
-    </div>
+      <div className="navbar-nav ml-auto">
+        <Link to="/signup">
+          <button className="btn btn-primary ml-2">Sign Up</button>
+        </Link>
+        <Link to="/login">
+          <button className="btn btn-primary ml-2">Sign In</button>
+        </Link>
+      </div>
+    </nav>
   );
 };
 
