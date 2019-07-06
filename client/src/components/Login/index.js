@@ -16,10 +16,11 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { email: username, password } = this.state;
     auth
       .login({
-        username: this.state.email,
-        password: this.state.password
+        username,
+        password
       })
       .then(res => {
         console.log("Logged in");
@@ -31,6 +32,7 @@ class Login extends Component {
   };
 
   render() {
+    const { email, password } = this.state;
     return (
       <div className="row">
         <div className="col-6 mx-auto" id="login">
@@ -38,13 +40,7 @@ class Login extends Component {
           <form className="text-left" onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
+              <input type="email" name="email" className="form-control" value={email} onChange={this.handleChange} />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
@@ -52,7 +48,7 @@ class Login extends Component {
                 type="password"
                 name="password"
                 className="form-control"
-                value={this.state.password}
+                value={password}
                 onChange={this.handleChange}
               />
             </div>
