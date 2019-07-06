@@ -1,19 +1,11 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Form extends Component {
   // Setting the component's initial state
   state = {
-    Title: "",
-    Question: ""
-  };
-
-  // need to check this out
-  componentDidMount() {
-    // this.loadQuestions();
-  }
-
-  loadQuestion = () => {
-    // API.getQuestion().then(res => this.setState({ user: res.data }));
+    title: "",
+    body: ""
   };
 
   handleInputChange = event => {
@@ -29,6 +21,11 @@ class Form extends Component {
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
+    axios
+      .post("/api/post", { title: this.state.title, body: this.state.body })
+      .then(function(response) {
+        console.log("successful");
+      });
   };
 
   render() {
@@ -36,14 +33,14 @@ class Form extends Component {
       <div>
         <form className="form">
           <input
-            value={this.state.Title}
+            value={this.state.title}
             name="Title"
             onChange={this.handleInputChange}
             type="text"
             placeholder="Question Heading"
           />
           <input
-            value={this.state.Question}
+            value={this.state.body}
             name="Question"
             onChange={this.handleInputChange}
             type="text"

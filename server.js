@@ -19,11 +19,11 @@ app.use(express.json());
 app.use(logger("common"));
 
 // passport configuration
-require("./config/passport")(passport); 
+require("./config/passport")(passport);
 
 // Configure session
 const secret = process.env.PASSPORT_KEY;
-app.use(session({ 
+app.use(session({
   secret: secret,
   saveUninitialized: false,
   resave: false
@@ -35,19 +35,19 @@ app.use(passport.session());
 // check if user is logged in
 const loggedin = (req, res, next) => {
   // user is logged in, proceed to the endpoint
-  if(req.isAuthenticated()) {
-      next()
+  if (req.isAuthenticated()) {
+    next()
 
-  // user in not logged in    
+    // user in not logged in    
   } else {
     const url = req.url;
     // check if the endpoint is allowed 
-    if((url==="/") || (url==="/visitor") || (url==="/signup")  || (url==="/login")) {
+    if ((url === "/") || (url === "/visitor") || (url === "/signup") || (url === "/login")) {
       next()
-    
-    // page is for logged in users only
+
+      // page is for logged in users only
     } else {
-        res.redirect("/login");
+      res.redirect("/login");
     }
   }
 };
@@ -71,10 +71,10 @@ createAdminAccount();
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
