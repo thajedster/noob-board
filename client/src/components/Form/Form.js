@@ -9,13 +9,11 @@ class Form extends Component {
 
   // need to check this out
   componentDidMount() {
-    this.loadQuestions();
+    // this.loadQuestions();
   }
 
   loadQuestion = () => {
-    API.getQuestion()
-      .then(res => this.setState({ user: res.data }))
-      .catch(err => console.log(err));
+    // API.getQuestion().then(res => this.setState({ user: res.data }));
   };
 
   handleInputChange = event => {
@@ -24,7 +22,7 @@ class Form extends Component {
 
     // Updating the input's state
     this.setState({
-      [Title]: value
+      [name]: value
     });
   };
 

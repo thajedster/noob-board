@@ -3,7 +3,7 @@ import "./App.css";
 import { Navbar } from "./components/Navbar";
 import Topics from "./components/Topics";
 import Signup from "./components/Signup";
-import Form from "./components/Form";
+import Form from "./components/Form/Form";
 
 const posts = [
   {
