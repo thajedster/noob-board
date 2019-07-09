@@ -38,7 +38,7 @@ module.exports = (app, passport) => {
 
   app.post("/login", passport.authenticate("local"), (req, res) => {
     // when authentication fails, passport responds with a 401
-    res.send("Sucess");
+    res.json(req.user);
   });
 
   app.get("/logout", (req, res) => {
