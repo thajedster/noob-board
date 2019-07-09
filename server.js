@@ -60,12 +60,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("public"));
 }
 
-require("./routes/api-routes")(app);
-require("./routes/auth")(app, passport);
-
-// Create admin account
-const createAdminAccount = require("./admin");
-createAdminAccount();
+require("./routes/api-routes")(app, passport);
+require("./routes/auth-routes")(app, passport);
 
 // Send every request to the React app
 // Define any API routes before this runs
