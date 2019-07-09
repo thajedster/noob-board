@@ -9,8 +9,8 @@ class TopicsContainer extends Component {
 
   componentDidMount() {
     Axios.get("/api/post").then(response => {
-      this.state.topics.push(response);
-      console.log(this.state.topics);
+      this.setState({ topics: response.data });
+      console.log(response);
     });
   }
 

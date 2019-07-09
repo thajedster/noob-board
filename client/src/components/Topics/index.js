@@ -11,8 +11,8 @@ function Topics(props) {
       </div>
       <div className="top-topics">
         {props.post.map(item => (
-          <div key={item.data.id}>
-            <h3>{item.data.title}</h3>
+          <div key={item.id}>
+            <h3>{item.title}</h3>
             <hr />
           </div>
         ))}
