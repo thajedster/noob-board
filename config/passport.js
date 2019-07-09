@@ -12,25 +12,26 @@ module.exports = passport => {
 
   passport.use(
     new localStrategy((email, password, done) => {
-      User.findOne({ email: email }, (err, user) => {
-        if (err) {
-          console.log("ERROR: ", err);
-          return done(err);
-        }
-        // User is not registered
-        if (!user) {
-          console.log("User not found");
-          return done(null, false);
-        }
-        // Password is incorrect
-        if (!user.comparePassword(password, user.password)) {
-          console.log("Password is incorrect");
-          return done(null, false);
-        }
-        // Successful
-        console.log("User is now logged in");
-        return done(null, user);
-      });
+      User.findOne({ email: email })
+        .select("password")
+        .then(user => {
+          // User is not registered
+          if (!user) {
+            console.log("User not found");
+            return done(null, false);
+          }
+          // Password is incorrect
+          if (!user.comparePassword(password, user.password)) {
+            console.log("Password is incorrect");
+            return done(null, false);
+          }
+          // Successful
+          console.log("User is now logged in");
+          return done(null, user);
+        })
+        .catch(err => {
+          done(err);
+        });
     })
   );
 };

@@ -11,7 +11,7 @@ const app = express();
 const db = require("./models");
 // connect to the mongodb installation
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/noob-board";
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
 
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
