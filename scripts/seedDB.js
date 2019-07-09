@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const db = require("../models");
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/noob-board");
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/noob-board";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
 
 const postSeed = [
   {
@@ -21,7 +22,7 @@ const postSeed = [
   }
 ];
 
-db.Post.remove({})
+db.Post.deleteMany()
   .then(() => db.Post.collection.insertMany(postSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
