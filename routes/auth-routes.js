@@ -43,6 +43,8 @@ module.exports = (app, passport) => {
 
   app.get("/logout", (req, res) => {
     req.logout();
+    req.session.destroy();
+    res.clearCookie("connect.sid");
     res.send("Success");
   });
 };
