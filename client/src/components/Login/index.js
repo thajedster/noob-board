@@ -35,9 +35,9 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
+    const { email, password, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />;
     }
     return (
       <div className="row">
