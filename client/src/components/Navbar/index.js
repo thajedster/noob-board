@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logout from "../Logout";
 import "./style.css";
 import logo from "../Navbar/noob-logo.png";
 
@@ -29,6 +30,7 @@ const Navbar = () => {
         <Link to="/login">
           <button className="btn btn-primary ml-2">Sign In</button>
         </Link>
+        <Logout />
       </div>
     </nav>
   );
