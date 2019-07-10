@@ -3,8 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import TopicsContainer from "./components/TopicsContainer";
 import Signup from "./components/Signup";
-import Login from "./components/Login";
-import Bio from "./components/Bio";
+import Form from "./components/Form/Form";
 
 const App = () => {
   return (
@@ -16,6 +15,7 @@ const App = () => {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Bio} />
+          <Route path="/question" component={Form} />
         </div>
       </div>
     </BrowserRouter>

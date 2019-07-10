@@ -17,6 +17,9 @@ const Navbar = () => {
           <Link to="/profile" className="nav-link">
             Profile
           </Link>
+          <Link to="/question" className="nav-link">
+            Ask Question
+          </Link>
         </li>
       </ul>
       <div className="navbar-nav ml-auto">
