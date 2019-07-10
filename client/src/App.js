@@ -1,43 +1,25 @@
-import React, { Component } from "react";
-import "./App.css";
-import { Navbar } from "./components/Navbar";
-import Topics from "./components/Topics";
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import TopicsContainer from "./components/TopicsContainer";
 import Signup from "./components/Signup";
 import Form from "./components/Form/Form";
 
-const posts = [
-  {
-    id: 1,
-    title: "git cheat sheet",
-    body: "assd asdas asdas asda d"
-  },
-  {
-    id: 2,
-    title: "css help",
-    body: "jvnckjv civjus wiuef  shbv"
-  },
-  {
-    id: 3,
-    title: "react props",
-    body: "awe iuf aosdio  iudfo iasdfi chifld asoidf"
-  }
-];
-
-class App extends Component {
-  state = {
-    topics: { post: posts }
-  };
-
-  render() {
-    return (
+const App = () => {
+  return (
+    <BrowserRouter>
       <div className="App">
         <Navbar />
-        <Topics post={this.state.topics.post} />
-        <Signup />
-        <Form />
+        <div className="container-fluid">
+          <Route path="/" exact component={TopicsContainer} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
+          <Route path="/profile" component={Bio} />
+          <Route path="/question" component={Form} />
+        </div>
       </div>
-    );
-  }
-}
+    </BrowserRouter>
+  );
+};
 
 export default App;
