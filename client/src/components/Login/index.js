@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import auth from "../../utils/auth";
 
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    redirect: null
   };
 
   handleChange = e => {
@@ -23,9 +25,9 @@ class Login extends Component {
         password
       })
       .then(res => {
-        this.setState({ email: "", password: "" });
         localStorage.setItem("user", res.data._id);
         console.log("Logged in");
+        this.setState({ redirect: "/" });
       })
       .catch(err => {
         console.log(err);
@@ -34,6 +36,9 @@ class Login extends Component {
 
   render() {
     const { email, password } = this.state;
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div className="row">
         <div className="col-6 mx-auto" id="login">
