@@ -3,6 +3,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import TopicsContainer from "./components/TopicsContainer";
 import Signup from "./components/Signup";
+import Login from "./components/Login";
+import Bio from "./components/Bio";
 import Form from "./components/Form/Form";
 
 const App = () => {
