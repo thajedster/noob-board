@@ -34,7 +34,9 @@ class Signup extends React.Component {
       .then(() => this.setState({ redirect: "/" }))
       .catch(function(err) {
         //TODO: error handling
-        if (err) throw err;
+        //create handle for email with no @ (regex)
+
+        if (err) throw err.response.data.message;
       });
   };
 

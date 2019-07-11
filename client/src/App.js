@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Bio from "./components/Bio";
 import Form from "./components/Form/Form";
+import Post from "./components/Post";
 
 class App extends Component {
   state = {
@@ -42,6 +43,7 @@ class App extends Component {
               <Route path="/login" exact render={() => <Login updateState={this.updateState} loggedIn={loggedIn} />} />
               <Route path="/profile" exact render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
               <Route path="/question" exact component={Form} />
+              <Route path="/:id" component={Post} />
               <Redirect to="/" />
             </Switch>
           </div>

@@ -10,7 +10,6 @@ class TopicsContainer extends Component {
   componentDidMount() {
     Axios.get("/api/post").then(response => {
       this.setState({ topics: response.data });
-      console.log(response);
     });
   }
 
