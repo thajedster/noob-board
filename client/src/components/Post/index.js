@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class Post extends Component {
   state = {
@@ -21,6 +22,10 @@ class Post extends Component {
         <h4>{this.state.post.title}</h4>
         <br />
         <h5>{this.state.post.body}</h5>
+        <br />
+        <Link to={"/"}>
+          <button>Back</button>
+        </Link>
       </div>
     );
   }
