@@ -6,7 +6,7 @@ class Logout extends Component {
     auth
       .logout()
       .then(res => {
-        localStorage.removeItem("user");
+        this.props.updateState({ loggedIn: false, userId: null });
         console.log("Logged out");
       })
       .catch(err => {

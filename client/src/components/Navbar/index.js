@@ -5,7 +5,7 @@ import "./style.css";
 import logo from "../Navbar/noob-logo.png";
 
 const Navbar = props => {
-  const { loggedIn } = props;
+  const { updateState, loggedIn } = props;
   return (
     <nav className="navbar navbar-expand-sm">
       <Link to="/" className="navbar-brand">
@@ -26,7 +26,7 @@ const Navbar = props => {
       </ul>
       {loggedIn ? (
         <div className="navbar-nav ml-auto">
-          <Logout />
+          <Logout updateState={updateState} />
         </div>
       ) : (
         <div className="navbar-nav ml-auto">

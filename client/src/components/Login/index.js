@@ -25,7 +25,7 @@ class Login extends Component {
         password
       })
       .then(res => {
-        localStorage.setItem("user", res.data._id);
+        this.props.updateState({ loggedIn: true, userId: res.data._id });
         console.log("Logged in");
         this.setState({ redirect: "/" });
       })
