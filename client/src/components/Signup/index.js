@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
 
@@ -8,13 +9,13 @@ class Signup extends React.Component {
     password: "",
     userName: "",
     firstName: "",
-    lastName: ""
+    lastName: "",
+    redirect: null
   };
 
   handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-    console.log(name, value);
     this.setState({
       [name]: value
     });
@@ -30,15 +31,7 @@ class Signup extends React.Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName
       })
-      .then(() =>
-        this.setState({
-          email: "",
-          password: "",
-          userName: "",
-          firstName: "",
-          lastName: ""
-        })
-      )
+      .then(() => this.setState({ redirect: "/" }))
       .catch(function(err) {
         //TODO: error handling
         //create handle for email with no @ (regex)
@@ -48,6 +41,9 @@ class Signup extends React.Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div className="row">
         <div className="jumbotron jumbotron-fluid" id="sign">
