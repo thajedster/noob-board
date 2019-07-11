@@ -4,7 +4,8 @@ import Logout from "../Logout";
 import "./style.css";
 import logo from "../Navbar/noob-logo.png";
 
-const Navbar = () => {
+const Navbar = props => {
+  const { loggedIn } = props;
   return (
     <nav className="navbar navbar-expand-sm">
       <Link to="/" className="navbar-brand">
@@ -23,15 +24,20 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
-      <div className="navbar-nav ml-auto">
-        <Link to="/signup">
-          <button className="btn btn-primary ml-2">Sign Up</button>
-        </Link>
-        <Link to="/login">
-          <button className="btn btn-primary ml-2">Sign In</button>
-        </Link>
-        <Logout />
-      </div>
+      {loggedIn ? (
+        <div className="navbar-nav ml-auto">
+          <Logout />
+        </div>
+      ) : (
+        <div className="navbar-nav ml-auto">
+          <Link to="/signup">
+            <button className="btn btn-primary ml-2">Sign Up</button>
+          </Link>
+          <Link to="/login">
+            <button className="btn btn-primary ml-2">Sign In</button>
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };
