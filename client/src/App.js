@@ -40,8 +40,8 @@ class App extends Component {
               <Route path="/" exact component={TopicsContainer} />
               <Route path="/signup" exact render={() => <Signup loggedIn={loggedIn} />} />
               <Route path="/login" exact render={() => <Login updateState={this.updateState} loggedIn={loggedIn} />} />
-              <Route path="/profile" render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
-              <Route path="/question" component={Form} />
+              <Route path="/profile" exact render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
+              <Route path="/question" exact component={Form} />
               <Redirect to="/" />
             </Switch>
           </div>
