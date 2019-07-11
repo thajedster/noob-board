@@ -34,25 +34,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// check if user is logged in
-const loggedin = (req, res, next) => {
-  // user is logged in, proceed to the endpoint
-  if (req.isAuthenticated()) {
-    next();
-
-    // user in not logged in
-  } else {
-    const url = req.url;
-    // check if the endpoint is disallowed
-    if (url === "/home" || url === "/profile") {
-      res.redirect("/login");
-    } else {
-      next();
-    }
-  }
-};
-app.use(loggedin);
-
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
