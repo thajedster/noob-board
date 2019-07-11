@@ -17,7 +17,7 @@ function Topics(props) {
         {props.post.map(item => (
           <div key={item.id}>
             <div className="posttitle">
-              <Link to={"/" + item.id}>
+              <Link to={"/post/" + item.id}>
                 <h3>{item.title}</h3>
               </Link>
             </div>
