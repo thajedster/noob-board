@@ -26,7 +26,7 @@ module.exports = (app, passport) => {
           record.save((err, user) => {
             if (err) {
               console.log(err);
-              res.status(500).send("Database error during registration");
+              res.status(500).json(err);
             } else {
               res.send(user);
             }

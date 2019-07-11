@@ -41,68 +41,45 @@ class Signup extends React.Component {
       )
       .catch(function(err) {
         //TODO: error handling
-        if (err) throw err;
+        //create handle for email with no @ (regex)
+
+        if (err) throw err.response.data.message;
       });
   };
 
   render() {
     return (
-      <div className='row'>
-        <div className='jumbotron jumbotron-fluid' id='sign'>
-          <div className='container'>
-            <h2 className='display-4'>Sign Up Now!</h2>
-            <form className='userForm'>
+      <div className="row">
+        <div className="jumbotron jumbotron-fluid" id="sign">
+          <div className="container">
+            <h2 className="display-4">Sign Up Now!</h2>
+            <form className="userForm">
               <label>
                 First Name:
-                <input
-                  type='text'
-                  name='firstName'
-                  onChange={this.handleChange}
-                  value={this.state.firstName}
-                />
+                <input type="text" name="firstName" onChange={this.handleChange} value={this.state.firstName} />
               </label>
               <br />
               <label>
                 Last Name:
-                <input
-                  type='text'
-                  name='lastName'
-                  onChange={this.handleChange}
-                  value={this.state.lastName}
-                />
+                <input type="text" name="lastName" onChange={this.handleChange} value={this.state.lastName} />
               </label>
               <br />
               <label>
                 Username:
-                <input
-                  type='text'
-                  name='userName'
-                  onChange={this.handleChange}
-                  value={this.state.userName}
-                />
+                <input type="text" name="userName" onChange={this.handleChange} value={this.state.userName} />
               </label>
               <br />
               <label>
                 E-mail:
-                <input
-                  type='text'
-                  name='email'
-                  onChange={this.handleChange}
-                  value={this.state.email}
-                />
+                <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
               </label>
               <br />
               <label>
                 Password:
-                <input
-                  type='password'
-                  name='password'
-                  onChange={this.handleChange}
-                  value={this.state.password}
-                />
+                <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
               </label>
               <br />
-              <input type='submit' value='Submit' onClick={this.handleSubmit} />
+              <input type="submit" value="Submit" onClick={this.handleSubmit} />
             </form>
           </div>
         </div>
