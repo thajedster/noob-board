@@ -38,11 +38,16 @@ module.exports = (app, passport) => {
 
   app.post("/login", passport.authenticate("local"), (req, res) => {
     // when authentication fails, passport responds with a 401
-    res.json(req.user);
+    const user = {
+      _id: req.user._id
+    };
+    res.json(user);
   });
 
   app.get("/logout", (req, res) => {
     req.logout();
+    req.session.destroy();
+    res.clearCookie("connect.sid");
     res.send("Success");
   });
 };

@@ -12,8 +12,7 @@ module.exports = passport => {
 
   passport.use(
     new localStrategy((email, password, done) => {
-      User.findOne({ email: email })
-        .select("password")
+      User.findOne({ email: email }, "+password")
         .then(user => {
           // User is not registered
           if (!user) {

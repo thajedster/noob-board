@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import TopicsContainer from "./components/TopicsContainer";
 import Signup from "./components/Signup";
@@ -7,21 +7,48 @@ import Login from "./components/Login";
 import Bio from "./components/Bio";
 import Form from "./components/Form/Form";
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <div className="container-fluid">
-          <Route path="/" exact component={TopicsContainer} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/profile" component={Bio} />
-          <Route path="/question" component={Form} />
+class App extends Component {
+  state = {
+    loggedIn: false,
+    userId: null
+  };
+
+  componentWillMount() {
+    if (localStorage.getItem("state")) {
+      this.setState(JSON.parse(localStorage.getItem("state")));
+    } else {
+      localStorage.setItem("state", JSON.stringify(this.state));
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  }
+
+  updateState = newState => {
+    this.setState(newState);
+  };
+
+  render() {
+    const { loggedIn, userId } = this.state;
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Navbar updateState={this.updateState} loggedIn={loggedIn} />
+          <div className="container-fluid">
+            <Switch>
+              <Route path="/" exact component={TopicsContainer} />
+              <Route path="/signup" exact render={() => <Signup loggedIn={loggedIn} />} />
+              <Route path="/login" exact render={() => <Login updateState={this.updateState} loggedIn={loggedIn} />} />
+              <Route path="/profile" exact render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
+              <Route path="/question" exact component={Form} />
+              <Redirect to="/" />
+            </Switch>
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
-  );
-};
+      </BrowserRouter>
+    );
+  }
+}
 
 export default App;
