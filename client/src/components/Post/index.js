@@ -21,8 +21,6 @@ class Post extends Component {
         <h4>{this.state.post.title}</h4>
         <br />
         <h5>{this.state.post.body}</h5>
-        <br />
-        <input type="text" name="comment" className="commentbox" />
       </div>
     );
   }
