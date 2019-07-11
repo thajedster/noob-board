@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import auth from "../../utils/auth";
 
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    redirect: null
   };
 
   handleChange = e => {
@@ -16,14 +18,16 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { email: username, password } = this.state;
     auth
       .login({
-        username: this.state.email,
-        password: this.state.password
+        username,
+        password
       })
       .then(res => {
+        this.props.updateState({ loggedIn: true, userId: res.data._id });
         console.log("Logged in");
-        this.setState({ email: "", password: "" });
+        this.setState({ redirect: "/" });
       })
       .catch(err => {
         console.log(err);
@@ -31,6 +35,10 @@ class Login extends Component {
   };
 
   render() {
+    const { email, password, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />;
+    }
     return (
       <div className="row">
         <div className="col-6 mx-auto" id="login">
@@ -38,13 +46,7 @@ class Login extends Component {
           <form className="text-left" onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
+              <input type="email" name="email" className="form-control" value={email} onChange={this.handleChange} />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
@@ -52,7 +54,7 @@ class Login extends Component {
                 type="password"
                 name="password"
                 className="form-control"
-                value={this.state.password}
+                value={password}
                 onChange={this.handleChange}
               />
             </div>

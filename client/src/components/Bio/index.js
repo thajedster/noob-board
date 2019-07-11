@@ -1,64 +1,61 @@
-import React from 'react';
-import './style.css';
-import axios from 'axios'; 
-import logo from '../Navbar/noob-logo.png';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import "./style.css";
+import axios from "axios";
+import logo from "../Navbar/noob-logo.png";
 
+class Bio extends Component {
+  state = {
+    name: "",
+    userName: "",
+    email: "",
+    redirect: null
+  };
 
-class Bio extends React.Component {
-    state = {
-        name:"",
-        userName: "",
-        email: ""
+  componentWillMount() {
+    const { loggedIn, userId } = this.props;
+
+    if (!loggedIn) {
+      this.setState({ redirect: "/login" });
     }
 
-    componentWillMount(){
-        axios.get("/api/user").then(
-            function(response) {
-            
-                const name = response.data.firstName + response.data.lastName 
-                this.setState({name}); 
+    axios
+      .get(`/api/user/${userId}`)
+      .then(res => {
+        const { firstName, lastName, userName, email } = res.data;
+        this.setState({ name: `${firstName} ${lastName}`, userName, email });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
-                const userName = response.data.userName
-                this.setState({userName}); 
+  componentDidUpdate() {
+    const { loggedIn } = this.props;
 
-                const email = response.data.email
-                this.setState({email}); 
-        
-
-              console.log("Name: " + response.data.firstName + response.data.lastName);
-              console.log("User Name: " + response.data.userName);
-              console.log("Email: " + response.data.email);
-            }
-        );
-    };
-
-
-    render(){
-        return (
-            <div className="bio">
-                <div className="card">
-                    <img src={logo} className="card-img-top" alt='logo'/>
-                <div className="card-body">
-                    <p className="card-text">Name:{this.state.name}</p>
-                    <p className="card-text">User Name:{this.state.userName}</p>
-                    <p className="card-text">Email:{this.state.email}</p>
-                </div>
-                </div>
-            </div>
-        )
+    if (!loggedIn) {
+      this.setState({ redirect: "/login" });
     }
-    
+  }
+
+  render() {
+    const { name, userName, email, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />;
+    }
+    return (
+      <div className="bio">
+        <div className="card">
+          <img src={logo} className="card-img-top" alt="logo" />
+          <div className="card-body">
+            <p className="card-text">Name: {name}</p>
+            <p className="card-text">User Name: {userName}</p>
+            <p className="card-text">Email: {email}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Bio;
-
-
-
-
-
-
-
-
-
-
-

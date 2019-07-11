@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class CommentForm extends Component {
+class Form extends Component {
   // Setting the component's initial state
   state = {
+    title: "",
     body: ""
   };
 
@@ -21,7 +22,7 @@ class CommentForm extends Component {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
     axios
-      .post("/api/comment", { body: this.state.body })
+      .post("/api/post", { title: this.state.title, body: this.state.body })
       .then(function(response) {
         console.log("successful");
       });
@@ -30,13 +31,20 @@ class CommentForm extends Component {
   render() {
     return (
       <div>
-        <form className="comment">
+        <form className="form">
           <input
-            value={this.state.body}
-            name="Comment"
+            value={this.state.title}
+            name="Title"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="Enter your Comment"
+            placeholder="Question Heading"
+          />
+          <input
+            value={this.state.body}
+            name="Question"
+            onChange={this.handleInputChange}
+            type="text"
+            placeholder="Enter your Question"
           />
           <button onClick={this.handleFormSubmit}>Submit</button>
         </form>
@@ -45,9 +53,4 @@ class CommentForm extends Component {
   }
 }
 
-export default CommentForm;
-
-
-   
-  
- 
+export default Form;

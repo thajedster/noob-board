@@ -1,45 +1,54 @@
 import React, { Component } from "react";
-import './App.css';
-import { Navbar } from "./components/Navbar";
-import Topics from "./components/Topics";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import TopicsContainer from "./components/TopicsContainer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Bio from "./components/Bio";
-
-const posts = [
-  {
-    id: 1,
-    title: "git cheat sheet",
-    body: "assd asdas asdas asda d"
-  },
-  {
-    id: 2,
-    title: "css help",
-    body: "jvnckjv civjus wiuef  shbv"
-  },
-  {
-    id: 3,
-    title: "react props",
-    body: "awe iuf aosdio  iudfo iasdfi chifld asoidf"
-  }
-];
+import Form from "./components/Form/Form";
+import Post from "./components/Post";
 
 class App extends Component {
   state = {
-    topics: { post: posts }
+    loggedIn: false,
+    userId: null
+  };
+
+  componentWillMount() {
+    if (localStorage.getItem("state")) {
+      this.setState(JSON.parse(localStorage.getItem("state")));
+    } else {
+      localStorage.setItem("state", JSON.stringify(this.state));
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  }
+
+  updateState = newState => {
+    this.setState(newState);
   };
 
   render() {
+    const { loggedIn, userId } = this.state;
     return (
-      <div className="App">
-        <Navbar />
-        <div className="container-fluid">
-          <Topics post={this.state.topics.post} />
-          <Signup />
-          <Login />
-          <Bio />
+      <BrowserRouter>
+        <div className="App">
+          <Navbar updateState={this.updateState} loggedIn={loggedIn} />
+          <div className="container-fluid">
+            <Switch>
+              <Route path="/" exact component={TopicsContainer} />
+              <Route path="/signup" exact render={() => <Signup loggedIn={loggedIn} />} />
+              <Route path="/login" exact render={() => <Login updateState={this.updateState} loggedIn={loggedIn} />} />
+              <Route path="/profile" exact render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
+              <Route path="/question" exact component={Form} />
+              <Route path="/:id" component={Post} />
+              <Redirect to="/" />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }

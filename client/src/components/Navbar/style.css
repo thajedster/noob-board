@@ -1,19 +1,13 @@
 .navbar {
-    overflow: hidden;
-    height: 4rem;
-    width:100%;  
-    background-color: #fffdd0;
-    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+  background-color: #fffdd0;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
 }
 
-.navbar > img {
-    width:50px;
-    height:50px;
-    float: left;
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
 }
 
-.navbar > button {
-    float: right;
-    /* margin-top: 5px;
-    margin-right: 20px; */
+.nav-link {
+  display: inline-block;
 }
