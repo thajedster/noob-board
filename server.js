@@ -5,7 +5,7 @@ const session = require("express-session");
 const passport = require("passport");
 const logger = require("morgan");
 require("dotenv").config();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 const app = express();
 
 const db = require("./models");
