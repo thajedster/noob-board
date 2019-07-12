@@ -30,7 +30,7 @@ class Post extends Component {
           <button>Back</button>
         </Link>
         {this.props.loggedIn ? <CommentForm postId={id} userId={this.props.userId} /> : <div />}
-        <CommentBox comments={comments} />
+        {comments ? <CommentBox comments={comments} /> : <div />}
       </div>
     );
   }

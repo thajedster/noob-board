@@ -5,26 +5,16 @@ class CommentBox extends React.Component {
     super();
 
     this.state = {
-      showComments: true,
-      comments: []
+      showComments: true
     };
   }
 
-  componentWillMount() {
-    const { comments } = this.props;
-    if (comments) {
-      this.setState({ comments });
-    }
-  }
-
   render() {
-    const comments = this._getComments();
-    let commentNodes;
+    const { comments } = this.props;
     let buttonText = "Show Comments";
 
     if (this.state.showComments) {
       buttonText = "Hide Comments";
-      commentNodes = <div className="comment-list">{comments}</div>;
     }
 
     return (
@@ -34,7 +24,11 @@ class CommentBox extends React.Component {
         </button>
         <h3>Comments</h3>
         <h4 className="comment-count">{this._getCommentsTitle(comments.length)}</h4>
-        {commentNodes}
+        <div className="comment-list">
+          {comments.map(comment => (
+            <div key={comment._id}>{comment.body}</div>
+          ))}
+        </div>
       </div>
     );
   } // end render
@@ -42,12 +36,6 @@ class CommentBox extends React.Component {
   _handleClick() {
     this.setState({
       showComments: !this.state.showComments
-    });
-  }
-
-  _getComments() {
-    return this.state.comments.map(comment => {
-      return <div>{comment.body}</div>;
     });
   }
 
