@@ -1,4 +1,5 @@
 const user = require("../controllers/user");
+const favourites = require("../controllers/favourites");
 const post = require("../controllers/post");
 const comment = require("../controllers/comment");
 
@@ -16,6 +17,9 @@ module.exports = app => {
   });
   app.post("/api/user", (req, res) => {
     user.create(req, res);
+  });
+  app.put("/api/user/favourites", (req, res) => {
+    favourites.update(req, res);
   });
   app.put("/api/user/:id", (req, res) => {
     user.update(req, res);
