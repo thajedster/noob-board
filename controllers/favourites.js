@@ -20,25 +20,15 @@ exports.update = (req, res) => {
         { new: true }
       )
         .then(data => {
-          if (!data) {
-            res.status(500).end();
-          } else {
-            res.json({ favourites: data.favourites });
-          }
+          res.json({ favourites: data.favourites });
         })
         .catch(err => {
           console.log(err);
-          res
-            .status(500)
-            .json(err)
-            .end();
+          res.status(500).json(err);
         });
     })
     .catch(err => {
       console.log(err);
-      res
-        .status(500)
-        .json(err)
-        .end();
+      res.status(500).json(err);
     });
 };
