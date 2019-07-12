@@ -34,7 +34,8 @@ const UserSchema = new Schema(
       type: String,
       trim: true,
       required: "lastName is required"
-    }
+    },
+    favourites: [{ type: Schema.Types.ObjectId, ref: "Post" }]
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
