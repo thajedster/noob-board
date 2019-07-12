@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 class CommentBox extends React.Component {
   constructor() {
@@ -7,8 +6,15 @@ class CommentBox extends React.Component {
 
     this.state = {
       showComments: true,
-      comments: [{ id: 1, author: "landiggity", body: "This is my first comment on this forum" }]
+      comments: []
     };
+  }
+
+  componentWillMount() {
+    const { comments } = this.props;
+    if (comments) {
+      this.setState({ comments });
+    }
   }
 
   render() {
@@ -23,7 +29,6 @@ class CommentBox extends React.Component {
 
     return (
       <div className="comment-box">
-        <h2>Leave your comment!</h2>
         <button id="comment-reveal" onClick={this._handleClick.bind(this)}>
           {buttonText}
         </button>
