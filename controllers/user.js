@@ -73,7 +73,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  User.updateOne({ _id: req.params.id }, req.body)
+  User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(data => {
       if (!data) {
         res.status(500).end();

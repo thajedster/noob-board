@@ -53,7 +53,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  Post.updateOne({ _id: req.params.id }, req.body)
+  Post.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(data => {
       if (!data) {
         res.status(500).end();
