@@ -19,17 +19,18 @@ class Post extends Component {
   }
 
   render() {
+    const { _id: id, title, body, comments } = this.state.post;
     return (
       <div>
-        <h4>{this.state.post.title}</h4>
+        <h4>{title}</h4>
         <br />
-        <h5>{this.state.post.body}</h5>
+        <h5>{body}</h5>
         <br />
         <Link to={"/"}>
           <button>Back</button>
         </Link>
-        <CommentForm />
-        <CommentBox />
+        {this.props.loggedIn ? <CommentForm postId={id} userId={this.props.userId} /> : <div />}
+        {comments ? <CommentBox comments={comments} /> : <div />}
       </div>
     );
   }
