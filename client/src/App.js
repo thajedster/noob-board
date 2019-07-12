@@ -43,7 +43,7 @@ class App extends Component {
               <Route path="/login" exact render={() => <Login updateState={this.updateState} loggedIn={loggedIn} />} />
               <Route path="/profile" exact render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
               <Route path="/question" exact component={Form} />
-              <Route path="/post/:id" component={Post} />
+              <Route path="/post/:id" exact render={props => <Post {...props} loggedIn={loggedIn} userId={userId} />} />
               <Redirect to="/" />
             </Switch>
           </div>
