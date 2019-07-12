@@ -11,24 +11,24 @@ class CommentBox extends React.Component {
 
   render() {
     const { comments } = this.props;
-    let buttonText = "Show Comments";
-
-    if (this.state.showComments) {
-      buttonText = "Hide Comments";
-    }
+    const { showComments } = this.state;
 
     return (
       <div className="comment-box">
         <button id="comment-reveal" onClick={this._handleClick.bind(this)}>
-          {buttonText}
+          {showComments ? "Hide Comments" : "Show Comments"}
         </button>
         <h3>Comments</h3>
         <h4 className="comment-count">{this._getCommentsTitle(comments.length)}</h4>
-        <div className="comment-list">
-          {comments.map(comment => (
-            <div key={comment._id}>{comment.body}</div>
-          ))}
-        </div>
+        {showComments ? (
+          <div className="comment-list">
+            {comments.map(comment => (
+              <div key={comment._id}>{comment.body}</div>
+            ))}
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
     );
   } // end render
