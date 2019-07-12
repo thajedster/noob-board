@@ -19,7 +19,7 @@ class Post extends Component {
   }
 
   render() {
-    const { title, body, comments } = this.state.post;
+    const { _id: id, title, body, comments } = this.state.post;
     return (
       <div>
         <h4>{title}</h4>
@@ -29,7 +29,7 @@ class Post extends Component {
         <Link to={"/"}>
           <button>Back</button>
         </Link>
-        {this.props.loggedIn ? <CommentForm userId={this.props.userId} /> : <div />}
+        {this.props.loggedIn ? <CommentForm postId={id} userId={this.props.userId} /> : <div />}
         <CommentBox comments={comments} />
       </div>
     );
