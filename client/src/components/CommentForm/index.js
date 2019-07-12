@@ -20,11 +20,9 @@ class CommentForm extends Component {
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    axios
-      .post("/api/comment", { body: this.state.body })
-      .then(function(response) {
-        console.log("successful");
-      });
+    axios.post("/api/comment", { body: this.state.body }).then(function(response) {
+      console.log("successful");
+    });
   };
 
   render() {
@@ -36,9 +34,9 @@ class CommentForm extends Component {
             name="Comment"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="Enter your Comment"
+            placeholder="Comment"
           />
-          <button onClick={this.handleFormSubmit}>Submit</button>
+          <button onClick={this.handleFormSubmit}>Leave your comment!</button>
         </form>
       </div>
     );
@@ -46,8 +44,3 @@ class CommentForm extends Component {
 }
 
 export default CommentForm;
-
-
-   
-  
- 

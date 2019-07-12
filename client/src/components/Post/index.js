@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CommentForm from "../CommentForm";
+import CommentBox from "../CommentBox";
 import { Link } from "react-router-dom";
 
 class Post extends Component {
@@ -26,6 +28,8 @@ class Post extends Component {
         <Link to={"/"}>
           <button>Back</button>
         </Link>
+        <CommentForm />
+        <CommentBox />
       </div>
     );
   }
