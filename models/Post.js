@@ -23,6 +23,10 @@ const PostSchema = new Schema(
   { timestamps: true, toJSON: { virtuals: true } }
 );
 
+PostSchema.index({
+  title: "text"
+});
+
 PostSchema.virtual("comments", {
   ref: "Comment",
   localField: "_id",

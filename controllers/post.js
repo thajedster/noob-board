@@ -28,6 +28,22 @@ exports.findById = (req, res) => {
     });
 };
 
+exports.search = (req, res) => {
+  Post.find({
+    $text: {
+      $search: req.query.query
+    }
+  })
+    .limit(10)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+};
+
 exports.create = (req, res) => {
   Post.create(req.body)
     .then(data => {

@@ -30,7 +30,11 @@ module.exports = app => {
 
   // Post
   app.get("/api/post", (req, res) => {
-    post.findAll(req, res);
+    if (req.query.query) {
+      post.search(req, res);
+    } else {
+      post.findAll(req, res);
+    }
   });
   app.get("/api/post/:id", (req, res) => {
     post.findById(req, res);
