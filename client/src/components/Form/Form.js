@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import "./style.css";
 
 class Form extends Component {
   // Setting the component's initial state
@@ -51,24 +52,36 @@ class Form extends Component {
       return <Redirect to={redirect} />;
     }
     return (
-      <div>
-        <form className="form">
-          <input
-            value={title}
-            name="title"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="What is your question?"
-          />
-          <input
-            value={body}
-            name="body"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Give details here!"
-          />
-          <button onClick={this.handleFormSubmit}>Ask Question!</button>
-        </form>
+      <div className="row">
+        <div className="col-4 text-center mx-auto">
+          <h2>Ask a Question!</h2>
+          <form>
+            <div className="form-group">
+              <input
+                className="form-control form-control-lg"
+                value={title}
+                name="title"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="What is your question?"
+              />
+            </div>
+            <div className="form-group">
+              <textarea
+                id="newPostBody"
+                className="form-control form-control"
+                value={body}
+                name="body"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="Give details here!"
+              />
+            </div>
+            <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>
+              Post It!
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
