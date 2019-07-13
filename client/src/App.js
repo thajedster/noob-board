@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Bio from "./components/Bio";
 import Form from "./components/Form/Form";
 import Post from "./components/Post";
+import Search from "./components/Search";
 
 class App extends Component {
   state = {
@@ -46,7 +47,8 @@ class App extends Component {
               <Route path="/signup" exact render={() => <Signup loggedIn={loggedIn} />} />
               <Route path="/login" exact render={() => <Login updateState={this.updateState} loggedIn={loggedIn} />} />
               <Route path="/profile" exact render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
-              <Route path="/question" exact component={Form} />
+              <Route path="/question" exact render={() => <Form loggedIn={loggedIn} userId={userId} />} />
+              <Route path="/search" exact component={Search} />
               <Route path="/post/:id" exact render={props => <Post {...props} loggedIn={loggedIn} userId={userId} />} />
               <Redirect to="/" />
             </Switch>
