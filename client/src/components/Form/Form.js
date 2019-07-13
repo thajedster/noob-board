@@ -1,12 +1,29 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Form extends Component {
   // Setting the component's initial state
   state = {
     title: "",
-    body: ""
+    body: "",
+    redirect: null
   };
+
+  componentWillMount() {
+    const { loggedIn } = this.props;
+    if (!loggedIn) {
+      this.setState({ redirect: "/login" });
+    }
+  }
+
+  componentDidUpdate() {
+    const { loggedIn } = this.props;
+
+    if (!loggedIn) {
+      this.setState({ redirect: "/login" });
+    }
+  }
 
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -21,32 +38,36 @@ class Form extends Component {
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    axios
-      .post("/api/post", { title: this.state.title, body: this.state.body })
-      .then(function(response) {
-        console.log("successful");
-      });
+    const { title, body } = this.state;
+    const { userId } = this.props;
+    axios.post("/api/post", { title: title, body: body, author: userId }).then(response => {
+      console.log("successful");
+    });
   };
 
   render() {
+    const { title, body, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />;
+    }
     return (
       <div>
         <form className="form">
           <input
-            value={this.state.title}
-            name="Title"
+            value={title}
+            name="title"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="Question Heading"
+            placeholder="What is your question?"
           />
           <input
-            value={this.state.body}
-            name="Question"
+            value={body}
+            name="body"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="Enter your Question"
+            placeholder="Give details here!"
           />
-          <button onClick={this.handleFormSubmit}>Submit</button>
+          <button onClick={this.handleFormSubmit}>Ask Question!</button>
         </form>
       </div>
     );
