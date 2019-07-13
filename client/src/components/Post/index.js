@@ -10,16 +10,21 @@ class Post extends Component {
   };
 
   componentDidMount() {
+    this.loadPost();
+  }
+
+  loadPost = () => {
     let id = this.props.match.params.id;
     axios.get("/api/post/" + id).then(res => {
       this.setState({
         post: res.data
       });
     });
-  }
+  };
 
   render() {
     const { _id: id, title, body, comments } = this.state.post;
+    const { loggedIn, userId } = this.props;
     return (
       <div>
         <h4>{title}</h4>
@@ -29,7 +34,7 @@ class Post extends Component {
         <Link to={"/"}>
           <button>Back</button>
         </Link>
-        {this.props.loggedIn ? <CommentForm postId={id} userId={this.props.userId} /> : <div />}
+        {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
         {comments ? <CommentBox comments={comments} /> : <div />}
       </div>
     );
