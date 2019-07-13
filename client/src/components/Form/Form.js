@@ -21,11 +21,9 @@ class Form extends Component {
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    axios
-      .post("/api/post", { title: this.state.title, body: this.state.body })
-      .then(function(response) {
-        console.log("successful");
-      });
+    axios.post("/api/post", { title: this.state.title, body: this.state.body }).then(response => {
+      console.log("successful");
+    });
   };
 
   render() {
@@ -34,19 +32,19 @@ class Form extends Component {
         <form className="form">
           <input
             value={this.state.title}
-            name="Title"
+            name="title"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="Question Heading"
+            placeholder="What is your question?"
           />
           <input
             value={this.state.body}
-            name="Question"
+            name="body"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="Enter your Question"
+            placeholder="Give details here!"
           />
-          <button onClick={this.handleFormSubmit}>Submit</button>
+          <button onClick={this.handleFormSubmit}>Ask Question!</button>
         </form>
       </div>
     );
