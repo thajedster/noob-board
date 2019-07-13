@@ -7,10 +7,7 @@ exports.findAll = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res
-        .status(500)
-        .json(err)
-        .end();
+      res.status(500).json(err);
     });
 };
 
@@ -27,10 +24,7 @@ exports.findByName = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res
-        .status(500)
-        .json(err)
-        .end();
+      res.status(500).json(err);
     });
 };
 
@@ -47,63 +41,39 @@ exports.findById = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res
-        .status(500)
-        .json(err)
-        .end();
+      res.status(500).json(err);
     });
 };
 
 exports.create = (req, res) => {
   User.create(req.body)
     .then(data => {
-      if (!data) {
-        res.status(500).end();
-      } else {
-        res.json(data);
-      }
+      res.json(data);
     })
     .catch(err => {
       console.log(err);
-      res
-        .status(500)
-        .json(err)
-        .end();
+      res.status(500).json(err);
     });
 };
 
 exports.update = (req, res) => {
-  User.updateOne({ _id: req.params.id }, req.body)
+  User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(data => {
-      if (!data) {
-        res.status(500).end();
-      } else {
-        res.json(data);
-      }
+      res.json(data);
     })
     .catch(err => {
       console.log(err);
-      res
-        .status(500)
-        .json(err)
-        .end();
+      res.status(500).json(err);
     });
 };
 
 exports.destroy = (req, res) => {
   User.deleteOne({ _id: req.params.id })
     .then(data => {
-      if (!data) {
-        res.status(500).end();
-      } else {
-        res.json(data);
-      }
+      res.json(data);
     })
     .catch(err => {
       console.log(err);
-      res
-        .status(500)
-        .json(err)
-        .end();
+      res.status(500).json(err);
     });
 };
