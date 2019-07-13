@@ -7,6 +7,8 @@ function Topics(props) {
   //change into smart function
   //create onclick function to change style of postbody to display inline
   //for <div className="top-topics"> just show item.title and not item.body
+  console.log("Topics component", props);
+
   return (
     <div className="row">
       <div className="topics-title">
@@ -14,12 +16,23 @@ function Topics(props) {
       </div>
 
       <div className="top-topics">
-        {props.post.map(item => (
+        {props.topics.map(item => (
           <div key={item.id}>
             <div className="posttitle">
               <Link to={"/post/" + item.id}>
                 <h3>{item.title}</h3>
               </Link>
+              <button
+                onClick={() => {
+                  props.onClickFavouriteButton(item.id);
+                }}
+              >
+                <i
+                  className={
+                    item.isFavourite === true ? "fas fa-heart text-danger border-0" : "far fa-heart border border-0"
+                  }
+                />
+              </button>
             </div>
 
             <div className="postbody">
