@@ -39,7 +39,11 @@ class App extends Component {
           <Navbar updateState={this.updateState} loggedIn={loggedIn} />
           <div className="container-fluid">
             <Switch>
-              <Route path="/" exact component={TopicsContainer} />
+              <Route
+                path="/"
+                exact
+                render={props => <TopicsContainer {...props} loggedIn={loggedIn} userId={userId} />}
+              />
               <Route path="/signup" exact render={() => <Signup loggedIn={loggedIn} />} />
               <Route path="/login" exact render={() => <Login updateState={this.updateState} loggedIn={loggedIn} />} />
               <Route path="/profile" exact render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
