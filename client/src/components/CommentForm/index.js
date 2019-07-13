@@ -27,7 +27,7 @@ class CommentForm extends Component {
         .post("/api/comment", { body: this.state.body, post: this.props.postId, author: this.props.userId })
         .then(response => {
           this.props.refresh();
-          this.setState({ body: "" });
+          this.setState({ body: "", error: "" });
         });
     }
   };
