@@ -22,8 +22,9 @@ class CommentForm extends Component {
     event.preventDefault();
     axios
       .post("/api/comment", { body: this.state.body, post: this.props.postId, author: this.props.userId })
-      .then(function(response) {
-        console.log("successful");
+      .then(response => {
+        this.props.refresh();
+        this.setState({ body: "" });
       });
   };
 
