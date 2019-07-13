@@ -36,11 +36,7 @@ exports.search = (req, res) => {
   })
     .limit(10)
     .then(data => {
-      if (!data) {
-        res.status(404).end();
-      } else {
-        res.json(data);
-      }
+      res.json(data);
     })
     .catch(err => {
       console.log(err);
