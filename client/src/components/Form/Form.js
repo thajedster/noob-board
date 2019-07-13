@@ -11,7 +11,7 @@ class Form extends Component {
   };
 
   componentWillMount() {
-    const { loggedIn, userId } = this.props;
+    const { loggedIn } = this.props;
     if (!loggedIn) {
       this.setState({ redirect: "/login" });
     }
@@ -38,7 +38,9 @@ class Form extends Component {
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    axios.post("/api/post", { title: this.state.title, body: this.state.body }).then(response => {
+    const { title, body } = this.state;
+    const { userId } = this.props;
+    axios.post("/api/post", { title: title, body: body, author: userId }).then(response => {
       console.log("successful");
     });
   };
