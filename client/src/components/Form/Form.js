@@ -1,12 +1,29 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Form extends Component {
   // Setting the component's initial state
   state = {
     title: "",
-    body: ""
+    body: "",
+    redirect: null
   };
+
+  componentWillMount() {
+    const { loggedIn, userId } = this.props;
+    if (!loggedIn) {
+      this.setState({ redirect: "/login" });
+    }
+  }
+
+  componentDidUpdate() {
+    const { loggedIn } = this.props;
+
+    if (!loggedIn) {
+      this.setState({ redirect: "/login" });
+    }
+  }
 
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -27,18 +44,22 @@ class Form extends Component {
   };
 
   render() {
+    const { title, body, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />;
+    }
     return (
       <div>
         <form className="form">
           <input
-            value={this.state.title}
+            value={title}
             name="title"
             onChange={this.handleInputChange}
             type="text"
             placeholder="What is your question?"
           />
           <input
-            value={this.state.body}
+            value={body}
             name="body"
             onChange={this.handleInputChange}
             type="text"
