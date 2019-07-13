@@ -28,6 +28,11 @@ const Navbar = props => {
               Ask Question
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to="/search" className="nav-link">
+              Search for Post
+            </Link>
+          </li>
         </ul>
       ) : (
         <ul className="navbar-nav mr-auto">
