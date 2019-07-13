@@ -38,8 +38,6 @@ class TopicsContainer extends Component {
       const wasFound = findResult > -1 ? true : false;
       topic.isFavourite = wasFound;
     });
-    console.log("Topics: ", topics);
-    console.log("Favourites: ", favourites);
     this.setState({ topics: topics, favourites: favourites });
   };
 
@@ -49,19 +47,16 @@ class TopicsContainer extends Component {
     let postIndex = topics.findIndex(topic => {
       return topic.id === postID;
     });
-    console.log(postIndex);
 
     // save the postId into this user's favourites
     axios
       .put("/api/user/favourites", { userId: this.props.userId, postId: this.state.topics[postIndex]._id })
       .then(response => {
         let favourites = response.data.favourites;
-        console.log("Click Favourites", favourites);
         this.checkFavorites(topics, favourites);
         this.setState({ error: "" });
       })
       .catch(err => {
-        console.log(err);
         this.setState({ error: err });
       });
   };

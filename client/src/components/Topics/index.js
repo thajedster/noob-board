@@ -7,7 +7,6 @@ function Topics(props) {
   //change into smart function
   //create onclick function to change style of postbody to display inline
   //for <div className="top-topics"> just show item.title and not item.body
-  console.log("Topics component", props);
 
   return (
     <div className="row">
