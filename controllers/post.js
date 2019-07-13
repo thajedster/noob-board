@@ -31,7 +31,7 @@ exports.findById = (req, res) => {
 exports.search = (req, res) => {
   Post.find({
     $text: {
-      $search: req.params.query
+      $search: req.query.query
     }
   })
     .limit(10)
