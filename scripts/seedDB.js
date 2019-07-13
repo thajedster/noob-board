@@ -19,6 +19,16 @@ const postSeed = [
     title: "How do I use React props?",
     body:
       "Ut vitae pharetra nibh. Proin vitae egestas tortor. Praesent ultricies turpis nec molestie interdum. Duis sed nisi sed erat feugiat placerat quis vel eros. Integer eu dapibus dolor, laoreet rhoncus diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean pellentesque ultricies dapibus."
+  },
+  {
+    title: "How to write a search component?",
+    body:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+  },
+  {
+    title: "How do I open a tin can?",
+    body:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
   }
 ];
 
