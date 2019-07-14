@@ -40,7 +40,14 @@ class App extends Component {
           <div className="container-fluid">
             <Switch>
               <Route
+                key="show-all"
                 path="/"
+                exact
+                render={props => <TopicsContainer {...props} loggedIn={loggedIn} userId={userId} />}
+              />
+              <Route
+                key="show-favourites"
+                path="/favourites"
                 exact
                 render={props => <TopicsContainer {...props} loggedIn={loggedIn} userId={userId} />}
               />
