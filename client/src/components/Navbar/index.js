@@ -29,6 +29,11 @@ const Navbar = props => {
             </Link>
           </li>
           <li className="nav-item">
+            <Link to="/favourites" className="nav-link">
+              Favourites
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link to="/search" className="nav-link">
               Search for Post
             </Link>
