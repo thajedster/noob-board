@@ -1,7 +1,14 @@
 const Post = require("../models/Post");
 
 exports.findAll = (req, res) => {
-  Post.find()
+  let filter = {};
+  if (req.query._id) {
+    filter = { _id: req.query._id };
+  } else {
+    let filter = {};
+  }
+
+  Post.find(filter)
     .then(data => {
       res.json(data);
     })
