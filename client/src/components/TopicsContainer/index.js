@@ -1,3 +1,4 @@
+"use strict";
 import React, { Component } from "react";
 import Topics from "../Topics";
 import axios from "axios";
@@ -9,6 +10,23 @@ class TopicsContainer extends Component {
   };
 
   componentDidMount() {
+    //check the route that was called
+    const pathname = this.props.history.location.pathname;
+    this.setState({ pathname: pathname });
+
+    // show all posts
+    if (pathname === "/") {
+      this.getAllPosts();
+      // show all favourite posts
+    } else if (pathname === "/favourites") {
+      this.getMyFavouritePosts();
+      // show all posts by this user
+    } else if (pathname === "/myposts") {
+      this.getMyPosts();
+    }
+  }
+
+  getAllPosts = () => {
     const { userId } = this.props;
 
     let promise = [];
@@ -21,12 +39,44 @@ class TopicsContainer extends Component {
     // wait for both preceeding axios calls to finish before proceeding
     // both responses will be push into an array
     Promise.all(promise).then(responses => {
-      // this.setState({ topics: responses[0].data, favourites: responses[1].data.favourites });
       let topics = responses[0].data;
       let favourites = responses[1].data.favourites;
-
       this.checkFavorites(topics, favourites);
     });
+  };
+
+  getMyFavouritePosts() {
+    const { userId } = this.props;
+
+    let favourites = [],
+      posts = [];
+
+    // get the list of this user's favourite posts
+    axios
+      .get(`/api/user/${userId}`)
+      .then(response => {
+        favourites = response.data.favourites;
+
+        // get details of the favourite posts
+        axios
+          .get(`/api/post/`, {
+            params: {
+              _id: favourites
+            }
+          })
+          .then(response => {
+            posts = response.data;
+            this.checkFavorites(posts, favourites);
+          })
+          .catch(err => {
+            console.log("ERROR retrieving 'post' details");
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log("ERROR retrieiving user's favourite posts");
+        console.log(err);
+      });
   }
 
   checkFavorites = (topics, favourites) => {
