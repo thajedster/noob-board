@@ -41,8 +41,8 @@ class Form extends Component {
     event.preventDefault();
     const { title, body } = this.state;
     const { userId } = this.props;
-    axios.post("/api/post", { title: title, body: body, author: userId }).then(response => {
-      console.log("successful");
+    axios.post("/api/post", { title: title, body: body, author: userId }).then(({ data }) => {
+      this.setState({ redirect: `/post/${data._id}` });
     });
   };
 
