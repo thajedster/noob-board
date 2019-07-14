@@ -4,10 +4,7 @@ exports.findAll = (req, res) => {
   let filter = {};
   if (req.query._id) {
     filter = { _id: req.query._id };
-  } else {
-    let filter = {};
   }
-
   Post.find(filter)
     .then(data => {
       res.json(data);
