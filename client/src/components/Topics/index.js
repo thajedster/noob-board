@@ -21,17 +21,19 @@ function Topics(props) {
               <Link to={"/post/" + item.id}>
                 <h3>{item.title}</h3>
               </Link>
-              <button
-                onClick={() => {
-                  props.onClickFavouriteButton(item.id);
-                }}
-              >
-                <i
-                  className={
-                    item.isFavourite === true ? "fas fa-heart text-danger border-0" : "far fa-heart border border-0"
-                  }
-                />
-              </button>
+              {props.loggedIn ? (
+                <button
+                  onClick={() => {
+                    props.onClickFavouriteButton(item.id);
+                  }}
+                >
+                  <i
+                    className={item.isFavourite ? "fas fa-heart text-danger border-0" : "far fa-heart border border-0"}
+                  />
+                </button>
+              ) : (
+                <div />
+              )}
             </div>
 
             <div className="postbody">
