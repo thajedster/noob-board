@@ -55,7 +55,7 @@ class Form extends Component {
       <div className="row">
         <div className="col-4 text-center mx-auto">
           <h2>Ask a Question!</h2>
-          <form>
+          <form onSubmit={this.handleFormSubmit}>
             <div className="form-group">
               <input
                 className="form-control form-control-lg"
@@ -64,6 +64,7 @@ class Form extends Component {
                 onChange={this.handleInputChange}
                 type="text"
                 placeholder="What is your question?"
+                required
               />
             </div>
             <div className="form-group">
@@ -75,11 +76,10 @@ class Form extends Component {
                 onChange={this.handleInputChange}
                 type="text"
                 placeholder="Give details here!"
+                required
               />
             </div>
-            <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>
-              Post It!
-            </button>
+            <input type="submit" className="btn btn-primary" value="Post It!" />
           </form>
         </div>
       </div>
