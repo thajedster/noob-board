@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logout from "../Logout";
 import "./style.css";
 import logo from "../Navbar/noob-logo.png";
@@ -18,37 +18,37 @@ const Navbar = props => {
         {loggedIn ? (
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <NavLink exact to="/" className="nav-link">
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/profile" className="nav-link">
+              <NavLink to="/profile" className="nav-link">
                 Profile
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/question" className="nav-link">
+              <NavLink to="/question" className="nav-link">
                 Ask Question
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/favourites" className="nav-link">
+              <NavLink to="/favourites" className="nav-link">
                 Favourites
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/search" className="nav-link">
+              <NavLink to="/search" className="nav-link">
                 Search for Post
-              </Link>
+              </NavLink>
             </li>
           </ul>
         ) : (
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <NavLink exact to="/" className="nav-link">
                 Home
-              </Link>
+              </NavLink>
             </li>
           </ul>
         )}
