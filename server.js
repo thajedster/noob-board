@@ -43,11 +43,11 @@ const loggedin = (req, res, next) => {
     // user in not logged in
   } else {
     const url = req.url;
-    // check if the endpoint is disallowed
-    if (url === "/home" || url === "/profile") {
-      res.redirect("/login");
-    } else {
+    // visitors are allowed to these endpoints
+    if (url === "/api/post" || url === "/signup" || url === "/login" || url === "/search" || url.includes("/post/")) {
       next();
+    } else {
+      res.status(401).end("Unauthorized");
     }
   }
 };
