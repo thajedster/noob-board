@@ -44,7 +44,14 @@ const loggedin = (req, res, next) => {
   } else {
     const url = req.url;
     // visitors are allowed to these endpoints
-    if (url === "/api/post" || url === "/signup" || url === "/login" || url === "/search" || url.includes("/post/")) {
+    if (
+      url === "/api/post" ||
+      url === "/signup" ||
+      url === "/login" ||
+      url === "/logout" ||
+      url === "/search" ||
+      url.includes("/post/")
+    ) {
       next();
     } else {
       res.status(401).end("Unauthorized");
