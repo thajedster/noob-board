@@ -7,7 +7,7 @@ import logo from "../Navbar/noob-logo.png";
 const Navbar = props => {
   const { updateState, loggedIn } = props;
   return (
-    <nav className="navbar navbar-expand-sm">
+    <nav className="navbar navbar-expand-sm fixed-top">
       <Link to="/" className="navbar-brand">
         <img src={logo} alt={"logo"} />
       </Link>
