@@ -1,11 +1,16 @@
 const Post = require("../models/Post");
 
 exports.findAll = (req, res) => {
-  let filter = {};
+  let filter = {},
+    sort = {};
   if (req.query._id) {
     filter = { _id: req.query._id };
   }
+  if (req.query.sort) {
+    sort = { createdAt: req.query.sort };
+  }
   Post.find(filter)
+    .sort(sort)
     .then(data => {
       res.json(data);
     })
