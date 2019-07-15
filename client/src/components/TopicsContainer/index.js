@@ -26,20 +26,26 @@ class TopicsContainer extends Component {
   }
 
   getAllPosts = () => {
-    const { userId } = this.props;
+    const { loggedIn, userId } = this.props;
 
     let promise = [];
 
     // get all posts
     promise.push(axios.get("/api/post"));
     // get this list of user's favourite posts
-    promise.push(axios.get(`/api/user/${userId}`));
+    if (loggedIn) {
+      promise.push(axios.get(`/api/user/${userId}`));
+    }
 
     // wait for both preceeding axios calls to finish before proceeding
     // both responses will be push into an array
     Promise.all(promise).then(responses => {
       let topics = responses[0].data;
-      let favourites = responses[1].data.favourites;
+      let favourites = [];
+      if (loggedIn) {
+        favourites = responses[1].data.favourites;
+      }
+
       this.checkFavorites(topics, favourites);
     });
   };
@@ -111,7 +117,13 @@ class TopicsContainer extends Component {
   };
 
   render() {
-    return <Topics topics={this.state.topics} onClickFavouriteButton={this.onClickFavouriteButton} />;
+    return (
+      <Topics
+        topics={this.state.topics}
+        onClickFavouriteButton={this.onClickFavouriteButton}
+        loggedIn={this.props.loggedIn}
+      />
+    );
   }
 }
 
