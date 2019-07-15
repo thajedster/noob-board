@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import "./style.css";
 
 class Form extends Component {
   // Setting the component's initial state
@@ -40,8 +41,8 @@ class Form extends Component {
     event.preventDefault();
     const { title, body } = this.state;
     const { userId } = this.props;
-    axios.post("/api/post", { title: title, body: body, author: userId }).then(response => {
-      console.log("successful");
+    axios.post("/api/post", { title: title, body: body, author: userId }).then(({ data }) => {
+      this.setState({ redirect: `/post/${data._id}` });
     });
   };
 
@@ -51,24 +52,36 @@ class Form extends Component {
       return <Redirect to={redirect} />;
     }
     return (
-      <div>
-        <form className="form">
-          <input
-            value={title}
-            name="title"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="What is your question?"
-          />
-          <input
-            value={body}
-            name="body"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Give details here!"
-          />
-          <button onClick={this.handleFormSubmit}>Ask Question!</button>
-        </form>
+      <div className="row">
+        <div className="col-4 text-center mx-auto">
+          <h2>Ask a Question!</h2>
+          <form onSubmit={this.handleFormSubmit}>
+            <div className="form-group">
+              <input
+                className="form-control form-control-lg"
+                value={title}
+                name="title"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="What is your question?"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <textarea
+                id="newPostBody"
+                className="form-control form-control"
+                value={body}
+                name="body"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="Give details here!"
+                required
+              />
+            </div>
+            <input type="submit" className="btn btn-primary" value="Post It!" />
+          </form>
+        </div>
       </div>
     );
   }

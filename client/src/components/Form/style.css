@@ -1,0 +1,6 @@
+form {
+  float: none;
+}
+#newPostBody {
+  min-height: 200px;
+}
