@@ -38,27 +38,24 @@ app.use(passport.session());
 
 // check if user is logged in
 const loggedin = (req, res, next) => {
+  const url = req.url;
+  console.log(url);
   // user is logged in, proceed to the endpoint
-  if (req.isAuthenticated()) {
-    next();
-
-    // user in not logged in
-  } else {
-    const url = req.url;
-    // visitors are allowed to these endpoints
-    if (
-      url === "/api/post" ||
+  if (
+    req.isAuthenticated() ||
+    (url === "/api/post" ||
       url === "/signup" ||
       url === "/login" ||
       url === "/logout" ||
       url === "/search" ||
-      url.includes("/post/")
-    ) {
-      next();
-    } else {
-      res.status(401).end("Unauthorized");
-    }
+      url.includes("/post/"))
+  ) {
+    return next();
   }
+  // user in not logged in
+  // visitors are allowed to these endpoints
+
+  return res.status(401).end("Unauthorized");
 };
 app.use(loggedin);
 
