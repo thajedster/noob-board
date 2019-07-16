@@ -31,12 +31,14 @@ class Signup extends React.Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName
       })
-      .then(() => this.setState({ redirect: "/" }))
+      .then(res => {
+        this.props.updateState({ loggedIn: true, userId: res.data._id });
+        this.props.history.push("/");
+      })
       .catch(function(err) {
         //TODO: error handling
         //create handle for email with no @ (regex)
-
-        if (err) throw err.response.data.message;
+        console.log(err);
       });
   };
 
