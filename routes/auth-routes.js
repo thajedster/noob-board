@@ -27,9 +27,20 @@ module.exports = (app, passport) => {
             if (err) {
               console.log(err);
               res.status(500).json(err);
-            } else {
-              res.send(user);
             }
+            // new user was created, now let's login the user
+            req.login(record, err => {
+              if (err) {
+                console.log("Error: Failed attempt to auto SignIn after the Registration", err);
+                res.status(500).json(err);
+              }
+
+              //when successful, user is assigned to req.user
+              const user = {
+                _id: req.user._id
+              };
+              res.json(user);
+            });
           });
         }
       }
