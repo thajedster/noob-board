@@ -40,23 +40,53 @@ class App extends Component {
           <div className="container-fluid">
             <Switch>
               <Route
+                exact
                 key="show-all"
                 path="/"
-                exact
-                render={props => <TopicsContainer {...props} loggedIn={loggedIn} userId={userId} />}
+                render={props => (
+                  <TopicsContainer {...props} updateState={this.updateState} loggedIn={loggedIn} userId={userId} />
+                )}
               />
               <Route
+                exact
                 key="show-favourites"
                 path="/favourites"
-                exact
-                render={props => <TopicsContainer {...props} loggedIn={loggedIn} userId={userId} />}
+                render={props => (
+                  <TopicsContainer {...props} updateState={this.updateState} loggedIn={loggedIn} userId={userId} />
+                )}
               />
-              <Route path="/signup" exact render={() => <Signup loggedIn={loggedIn} />} />
-              <Route path="/login" exact render={() => <Login updateState={this.updateState} loggedIn={loggedIn} />} />
-              <Route path="/profile" exact render={() => <Bio loggedIn={loggedIn} userId={userId} />} />
-              <Route path="/question" exact render={() => <Form loggedIn={loggedIn} userId={userId} />} />
-              <Route path="/search" exact component={Search} />
-              <Route path="/post/:id" exact render={props => <Post {...props} loggedIn={loggedIn} userId={userId} />} />
+              <Route
+                exact
+                path="/signup"
+                render={props => <Signup {...props} updateState={this.updateState} loggedIn={loggedIn} />}
+              />
+              <Route
+                exact
+                path="/login"
+                render={props => <Login {...props} updateState={this.updateState} loggedIn={loggedIn} />}
+              />
+              <Route
+                exact
+                path="/profile"
+                render={props => <Bio {...props} updateState={this.updateState} loggedIn={loggedIn} userId={userId} />}
+              />
+              <Route
+                exact
+                path="/question"
+                render={props => <Form {...props} updateState={this.updateState} loggedIn={loggedIn} userId={userId} />}
+              />
+              <Route
+                exact
+                path="/search"
+                render={props => (
+                  <Search {...props} updateState={this.updateState} loggedIn={loggedIn} userId={userId} />
+                )}
+              />
+              <Route
+                exact
+                path="/post/:id"
+                render={props => <Post {...props} updateState={this.updateState} loggedIn={loggedIn} userId={userId} />}
+              />
               <Redirect to="/" />
             </Switch>
           </div>
