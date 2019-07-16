@@ -27,7 +27,7 @@ class Login extends Component {
       .then(res => {
         this.props.updateState({ loggedIn: true, userId: res.data._id });
         console.log("Logged in");
-        this.setState({ redirect: "/" });
+        this.props.history.push("/");
       })
       .catch(err => {
         console.log(err);
