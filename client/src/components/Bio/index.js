@@ -48,6 +48,8 @@ class Bio extends Component {
   }
 
   //TODO: create links to each post
+  //store res data in array in state
+  //after render, create link to
   render() {
     const { name, userName, email, redirect } = this.state;
     if (redirect) {

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Suggestions = props => {
   const titles = props.results.map(title => (
-    <Link to={"/post/" + title.id}>
-      <li key={title.id}>{title.title}</li>
-    </Link>
+    <li key={title.id}>
+      <Link to={"/post/" + title.id}>{title.title}</Link>
+    </li>
   ));
   return <ul>{titles}</ul>;
 };
