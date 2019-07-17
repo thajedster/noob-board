@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 class Post extends Component {
   state = {
-    post: ""
+    post: "",
+    user: ""
   };
 
   componentDidMount() {
@@ -19,17 +20,28 @@ class Post extends Component {
       this.setState({
         post: res.data
       });
+
+      axios.get("/api/user/" + this.state.post.author._id).then(res => {
+        this.setState({
+          user: res.data
+        });
+      });
     });
   };
 
   render() {
-    const { _id: id, title, body, comments } = this.state.post;
+    const { _id: id, title, body, comments, createdAt } = this.state.post;
     const { loggedIn, userId } = this.props;
+    const { userName } = this.state.user;
     return (
       <div>
         <h4>{title}</h4>
         <br />
         <h5>{body}</h5>
+        <br />
+        <h6>{userName}</h6>
+        <br />
+        <h6>{createdAt}</h6>
         <br />
         <Link to={"/"}>
           <button>Back</button>
