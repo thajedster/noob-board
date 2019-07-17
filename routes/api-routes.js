@@ -19,7 +19,7 @@ module.exports = app => {
       user.findAll(req, res);
     }
   });
-  app.get("/api/user/:id", ensureAuthenticated, (req, res) => {
+  app.get("/api/user/:id", (req, res) => {
     user.findById(req, res);
   });
   app.post("/api/user", ensureAuthenticated, (req, res) => {
