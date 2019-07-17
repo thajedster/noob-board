@@ -21,7 +21,7 @@ class Post extends Component {
         post: res.data
       });
 
-      axios.get("/api/user/" + this.props.userId).then(res => {
+      axios.get("/api/user/" + this.state.post.author._id).then(res => {
         this.setState({
           user: res.data
         });
