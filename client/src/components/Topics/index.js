@@ -10,39 +10,43 @@ function Topics(props) {
 
   return (
     <div className="row">
-      <div className="topics-title">
-        <h1>Hot Topics</h1>
-      </div>
+      <div className="col-12 col-md-8 mx-auto">
+        <div className="topics-title">
+          <h1>Hot Topics</h1>
+        </div>
 
-      <div className="top-topics">
-        {props.topics.map(item => (
-          <div key={item.id}>
-            <div className="posttitle">
-              <Link to={"/post/" + item.id}>
-                <h3>{item.title}</h3>
-              </Link>
-              {props.loggedIn ? (
-                <button
-                  onClick={() => {
-                    props.onClickFavouriteButton(item.id);
-                  }}
-                >
-                  <i
-                    className={item.isFavourite ? "fas fa-heart text-danger border-0" : "far fa-heart border border-0"}
-                  />
-                </button>
-              ) : (
-                <div />
-              )}
+        <div className="top-topics">
+          {props.topics.map(item => (
+            <div key={item.id}>
+              <div className="posttitle">
+                <Link to={"/post/" + item.id}>
+                  <h3>{item.title}</h3>
+                </Link>
+                {props.loggedIn ? (
+                  <button
+                    onClick={() => {
+                      props.onClickFavouriteButton(item.id);
+                    }}
+                  >
+                    <i
+                      className={
+                        item.isFavourite ? "fas fa-heart text-danger border-0" : "far fa-heart border border-0"
+                      }
+                    />
+                  </button>
+                ) : (
+                  <div />
+                )}
+              </div>
+
+              <div className="postbody">
+                <p>{item.body}</p>
+              </div>
+
+              <hr />
             </div>
-
-            <div className="postbody">
-              <p>{item.body}</p>
-            </div>
-
-            <hr />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
