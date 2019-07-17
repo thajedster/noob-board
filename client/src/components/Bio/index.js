@@ -3,13 +3,15 @@ import { Redirect } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
 import logo from "../Navbar/noob-logo.png";
+import { Link } from "react-router-dom";
 
 class Bio extends Component {
   state = {
     name: "",
     userName: "",
     email: "",
-    redirect: null
+    redirect: null,
+    post: []
   };
 
   componentWillMount() {
@@ -23,6 +25,13 @@ class Bio extends Component {
       .get(`/api/user/${userId}`)
       .then(res => {
         const { firstName, lastName, userName, email } = res.data;
+        const postArray = [];
+
+        res.data.posts.map(post => {
+          postArray.push(post.title + ", ");
+        });
+
+        this.setState({ post: postArray });
         this.setState({ name: `${firstName} ${lastName}`, userName, email });
       })
       .catch(err => {
@@ -38,6 +47,7 @@ class Bio extends Component {
     }
   }
 
+  //TODO: create links to each post
   render() {
     const { name, userName, email, redirect } = this.state;
     if (redirect) {
@@ -51,6 +61,10 @@ class Bio extends Component {
             <p className="card-text">Name: {name}</p>
             <p className="card-text">User Name: {userName}</p>
             <p className="card-text">Email: {email}</p>
+          </div>
+          <div className="userPosts">
+            My Posts:
+            {this.state.post}
           </div>
         </div>
       </div>
