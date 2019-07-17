@@ -53,7 +53,7 @@ class Form extends Component {
     }
     return (
       <div className="row">
-        <div className="col-4 text-center mx-auto">
+        <div className="col-12 col-md-8 col-lg-6 text-center mx-auto">
           <h2>Ask a Question!</h2>
           <form onSubmit={this.handleFormSubmit}>
             <div className="form-group">
