@@ -34,18 +34,27 @@ class CommentForm extends Component {
 
   render() {
     return (
-      <div className="row">
-        <form className="comment">
-          <input
-            value={this.state.body}
-            name="body"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Comment"
-            style={{ border: `1px solid ${this.state.error ? "red" : "black"}` }}
-          />
-          <button onClick={this.handleFormSubmit}>Leave your comment!</button>
-          {this.state.error && <span style={{ color: "red" }}>{this.state.error}</span>}
+      <div className="col-12 col-sm-10 col-md-8 col-lg-6">
+        <form id="comment-form" className="mb-3">
+          <div className="form-group">
+            <input
+              className="form-control"
+              value={this.state.body}
+              name="body"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="Comment"
+              style={{ border: `1px solid ${this.state.error ? "red" : "black"}` }}
+            />
+            {this.state.error && (
+              <small className="form-text" style={{ color: "red" }}>
+                {this.state.error}
+              </small>
+            )}
+          </div>
+          <button className="btn btn-primary" onClick={this.handleFormSubmit}>
+            Leave your comment!
+          </button>
         </form>
       </div>
     );
