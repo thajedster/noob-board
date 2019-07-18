@@ -1,29 +1,11 @@
-# Create React Express App
+# NoobBoard
 
-## About This Boilerplate
+## About NoobBoard
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+This react app was built to allow different individuals to create accounts to be able to access a database of questions that are related to programming. Users can post questions for help. In addition, users have the ability to comment on other questions to provide other users with answers. 
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+Each user is also capable in liking posts with the ability of tracking them later on if they contained questions that grab the users intrest. 
 
-## Starting the app locally
+Each user has their own profile page. This profile page contains the user's name and their username. In addition, it contains all the posts that the user has posted. 
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
 
-```
-npm install
-```
-
-This should install node modules within the server and the client folder.
-
-After both installations complete, run the following command in your terminal:
-
-```
-npm start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
