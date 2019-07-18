@@ -14,16 +14,27 @@ class CommentBox extends React.Component {
     const { showComments } = this.state;
 
     return (
-      <div className="comment-box">
-        <button id="comment-reveal" onClick={this._handleClick.bind(this)}>
+      <div id="comment-box" className="col-12 col-md-10 col-lg-8">
+        <button
+          id="comment-reveal"
+          className={`btn btn-outline-${showComments ? "secondary" : "primary"} btn-sm float-right`}
+          onClick={this._handleClick.bind(this)}
+        >
           {showComments ? "Hide Comments" : "Show Comments"}
         </button>
         <h3>Comments</h3>
-        <h4 className="comment-count">{this._getCommentsTitle(comments.length)}</h4>
+        <h4 id="comment-count">{this._getCommentsTitle(comments.length)}</h4>
         {showComments ? (
-          <div className="comment-list">
+          <div id="comment-list">
             {comments.map(comment => (
-              <div key={comment._id}>{comment.body}</div>
+              <div className="card mb-3" key={comment._id}>
+                <div className="card-body">
+                  {/*<h5 className="card-title">
+                    Guest <span className="h6 text-muted float-right">2 hours ago</span>
+                  </h5>*/}
+                  <p className="card-text">{comment.body}</p>
+                </div>
+              </div>
             ))}
           </div>
         ) : (
