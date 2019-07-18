@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import CommentForm from "../CommentForm";
 import CommentBox from "../CommentBox";
-import { Link } from "react-router-dom";
 
 class Post extends Component {
   state = {
@@ -44,9 +43,7 @@ class Post extends Component {
           <br />
           <h6>{createdAt}</h6>
           <br />
-          <Link to={"/"}>
-            <button>Back</button>
-          </Link>
+          <button onClick={this.props.history.goBack}>Back</button>
           <hr />
           {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
           {comments ? <CommentBox comments={comments} /> : <div />}
