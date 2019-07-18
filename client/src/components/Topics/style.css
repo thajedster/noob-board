@@ -1,26 +1,12 @@
-h1,
+.topics-title,
 .top-topics {
   font-family: "Poppins", sans-serif;
-  float: left;
   margin-left: 20px;
   margin-bottom: 20px;
   color: #7e7e7e;
   font-weight: 300;
 }
 
-body {
-  background-color: white;
-}
-
-.top-topics {
-  width: 100%;
-  text-align: left;
-}
-
 .topics-title {
   margin-top: 10px;
 }
-
-/* .postbody {
-  display: none;
-} */

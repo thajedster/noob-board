@@ -34,20 +34,23 @@ class Post extends Component {
     const { loggedIn, userId } = this.props;
     const { userName } = this.state.user;
     return (
-      <div>
-        <h4>{title}</h4>
-        <br />
-        <h5>{body}</h5>
-        <br />
-        <h6>{userName}</h6>
-        <br />
-        <h6>{createdAt}</h6>
-        <br />
-        <Link to={"/"}>
-          <button>Back</button>
-        </Link>
-        {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
-        {comments ? <CommentBox comments={comments} /> : <div />}
+      <div className="row">
+        <div className="col-12 col-md-8 mx-auto">
+          <h4>{title}</h4>
+          <br />
+          <h5>{body}</h5>
+          <br />
+          <h6>{userName}</h6>
+          <br />
+          <h6>{createdAt}</h6>
+          <br />
+          <Link to={"/"}>
+            <button>Back</button>
+          </Link>
+          <hr />
+          {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
+          {comments ? <CommentBox comments={comments} /> : <div />}
+        </div>
       </div>
     );
   }
