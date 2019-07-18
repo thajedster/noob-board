@@ -30,7 +30,7 @@ class Post extends Component {
 
   render() {
     const { _id: id, title, body, comments, createdAt } = this.state.post;
-    const { loggedIn, userId } = this.props;
+    const { loggedIn, userId, history } = this.props;
     const { userName } = this.state.user;
     return (
       <div className="row">
@@ -43,7 +43,7 @@ class Post extends Component {
           <br />
           <h6>{createdAt}</h6>
           <br />
-          <button onClick={this.props.history.goBack}>Back</button>
+          <button onClick={history.goBack}>Back</button>
           <hr />
           {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
           {comments ? <CommentBox comments={comments} /> : <div />}

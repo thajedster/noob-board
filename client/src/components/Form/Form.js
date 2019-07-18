@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 
@@ -7,22 +6,21 @@ class Form extends Component {
   // Setting the component's initial state
   state = {
     title: "",
-    body: "",
-    redirect: null
+    body: ""
   };
 
-  componentWillMount() {
-    const { loggedIn } = this.props;
+  componentDidMount() {
+    const { loggedIn, history } = this.props;
     if (!loggedIn) {
-      this.setState({ redirect: "/login" });
+      history.push("/login");
     }
   }
 
   componentDidUpdate() {
-    const { loggedIn } = this.props;
+    const { loggedIn, history } = this.props;
 
     if (!loggedIn) {
-      this.setState({ redirect: "/login" });
+      history.push("/login");
     }
   }
 
@@ -40,17 +38,14 @@ class Form extends Component {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
     const { title, body } = this.state;
-    const { userId } = this.props;
+    const { userId, history } = this.props;
     axios.post("/api/post", { title: title, body: body, author: userId }).then(({ data }) => {
-      this.setState({ redirect: `/post/${data._id}` });
+      history.push(`/post/${data._id}`);
     });
   };
 
   render() {
-    const { title, body, redirect } = this.state;
-    if (redirect) {
-      return <Redirect to={redirect} />;
-    }
+    const { title, body } = this.state;
     return (
       <div className="row">
         <div className="col-12 col-md-8 col-lg-6 text-center mx-auto">

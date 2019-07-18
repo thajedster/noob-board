@@ -15,7 +15,7 @@ class App extends Component {
     userId: null
   };
 
-  componentWillMount() {
+  componentDidMount() {
     if (localStorage.getItem("state")) {
       this.setState(JSON.parse(localStorage.getItem("state")));
     } else {

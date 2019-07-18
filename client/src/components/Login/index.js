@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import auth from "../../utils/auth";
 
 class Login extends Component {
   state = {
     email: "",
-    password: "",
-    redirect: null
+    password: ""
   };
 
   handleChange = e => {
@@ -19,15 +17,16 @@ class Login extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { email: username, password } = this.state;
+    const { updateState, history } = this.props;
     auth
       .login({
         username,
         password
       })
       .then(res => {
-        this.props.updateState({ loggedIn: true, userId: res.data._id });
+        updateState({ loggedIn: true, userId: res.data._id });
         console.log("Logged in");
-        this.props.history.push("/");
+        history.push("/");
       })
       .catch(err => {
         console.log(err);
@@ -35,10 +34,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password, redirect } = this.state;
-    if (redirect) {
-      return <Redirect to={redirect} />;
-    }
+    const { email, password } = this.state;
     return (
       <div className="row">
         <div className="col-6 mx-auto" id="login">
