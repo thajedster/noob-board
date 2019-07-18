@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
 import logo from "../Navbar/noob-logo.png";
-import UserPost from "../UserPost";
+import Suggestions from "../Suggestions";
 
 class Bio extends Component {
   state = {
@@ -11,7 +11,7 @@ class Bio extends Component {
     userName: "",
     email: "",
     redirect: null,
-    post: []
+    results: []
   };
 
   componentWillMount() {
@@ -26,7 +26,7 @@ class Bio extends Component {
       .then(res => {
         const { firstName, lastName, userName, email } = res.data;
         this.setState({
-          post: res.data.posts
+          results: res.data.posts
         });
 
         this.setState({ name: `${firstName} ${lastName}`, userName, email });
@@ -63,7 +63,7 @@ class Bio extends Component {
             <p className="card-text">Email: {email}</p>
           </div>
           <div className="userPosts">
-            My Posts: <UserPost post={this.state.post} />
+            My Posts: <Suggestions results={this.state.results} />
           </div>
         </div>
       </div>
