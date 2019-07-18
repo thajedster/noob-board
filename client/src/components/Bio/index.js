@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
 import logo from "../Navbar/noob-logo.png";
@@ -10,15 +9,14 @@ class Bio extends Component {
     name: "",
     userName: "",
     email: "",
-    redirect: null,
     results: []
   };
 
-  componentWillMount() {
-    const { loggedIn, userId } = this.props;
+  componentDidMount() {
+    const { loggedIn, userId, history } = this.props;
 
     if (!loggedIn) {
-      this.setState({ redirect: "/login" });
+      return history.push("/login");
     }
 
     axios
@@ -37,10 +35,10 @@ class Bio extends Component {
   }
 
   componentDidUpdate() {
-    const { loggedIn } = this.props;
+    const { loggedIn, history } = this.props;
 
     if (!loggedIn) {
-      this.setState({ redirect: "/login" });
+      history.push("/login");
     }
   }
 
@@ -48,11 +46,7 @@ class Bio extends Component {
   //store res data in array in state
   //after render, create link to
   render() {
-    const { name, userName, email, redirect } = this.state;
-    if (redirect) {
-      return <Redirect to={redirect} />;
-    }
-
+    const { name, userName, email } = this.state;
     return (
       <div className="bio">
         <div className="card">

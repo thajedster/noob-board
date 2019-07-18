@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
 
@@ -9,8 +8,7 @@ class Signup extends React.Component {
     password: "",
     userName: "",
     firstName: "",
-    lastName: "",
-    redirect: null
+    lastName: ""
   };
 
   handleChange = event => {
@@ -23,6 +21,7 @@ class Signup extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const { updateState, history } = this.props;
     axios
       .post("/signup", {
         email: this.state.email,
@@ -32,8 +31,8 @@ class Signup extends React.Component {
         lastName: this.state.lastName
       })
       .then(res => {
-        this.props.updateState({ loggedIn: true, userId: res.data._id });
-        this.props.history.push("/");
+        updateState({ loggedIn: true, userId: res.data._id });
+        history.push("/");
       })
       .catch(function(err) {
         //TODO: error handling
@@ -43,9 +42,6 @@ class Signup extends React.Component {
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
-    }
     return (
       <div className="row">
         <div className="jumbotron jumbotron-fluid" id="sign">
