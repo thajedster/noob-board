@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Moment from "react-moment";
 import CommentForm from "../CommentForm";
 import CommentBox from "../CommentBox";
 
@@ -41,7 +42,7 @@ class Post extends Component {
           <br />
           <h6>{userName}</h6>
           <br />
-          <h6>{createdAt}</h6>
+          <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
           <br />
           <button onClick={history.goBack}>Back</button>
           <hr />
