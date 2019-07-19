@@ -1,6 +1,7 @@
 import React from "react";
-import "./style.css";
 import { Link } from "react-router-dom";
+import ClampLines from "react-clamp-lines";
+import "./style.css";
 
 function Topics(props) {
   //TODO: create new component of title and body (full article) and make topic titles show these in the bottom
@@ -36,7 +37,14 @@ function Topics(props) {
                     <h3>{item.title}</h3>
                   </Link>
                 </div>
-                <p className="card-text">{item.body}</p>
+                <ClampLines
+                  text={item.body}
+                  id={item.id}
+                  lines={2}
+                  className="card-text"
+                  innerElement="p"
+                  buttons={false}
+                />
               </div>
             </div>
           ))}
