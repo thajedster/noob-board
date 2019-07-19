@@ -34,17 +34,20 @@ class Post extends Component {
     const { loggedIn, userId, history } = this.props;
     const { userName } = this.state.user;
     return (
-      <div className="row">
+      <div className="row pt-3">
         <div className="col-12 col-md-8 mx-auto">
-          <h4>{title}</h4>
-          <br />
-          <h5>{body}</h5>
-          <br />
-          <h6>{userName}</h6>
-          <br />
-          <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
-          <br />
-          <button onClick={history.goBack}>Back</button>
+          <div id="post" className="card">
+            <div className="card-body">
+              <h2>{title}</h2>
+              <h6>
+                by {userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
+              </h6>
+              <p>{body}</p>
+              <button className="btn" onClick={history.goBack}>
+                <i className="fas fa-arrow-left" /> Go Back
+              </button>
+            </div>
+          </div>
           <hr />
           {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
           {comments ? <CommentBox comments={comments} /> : <div />}
