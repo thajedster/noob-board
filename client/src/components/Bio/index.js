@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import axios from "axios";
-import logo from "../../images/noob-logo.png";
+import avatar from "../../images/avatar.svg";
 import Suggestions from "../Suggestions";
 
 class Bio extends Component {
@@ -50,7 +50,7 @@ class Bio extends Component {
     return (
       <div className="bio">
         <div className="card">
-          <img width={100} height={100} src={logo} alt="" />
+          <img width={100} height={100} src={avatar} className="avatar" alt="" />
           <div className="card-body">
             <p className="card-text">Name: {name}</p>
             <p className="card-text">User Name: {userName}</p>
