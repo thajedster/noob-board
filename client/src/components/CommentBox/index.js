@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "react-moment";
 
 class CommentBox extends React.Component {
   constructor() {
@@ -30,8 +31,11 @@ class CommentBox extends React.Component {
               <div className="card mb-3" key={comment._id}>
                 <div className="card-body">
                   {/*<h5 className="card-title">
-                    Guest <span className="h6 text-muted float-right">2 hours ago</span>
-                  </h5>*/}
+                    Guest*/}
+                  <span className="h6 text-muted float-right">
+                    <Moment fromNow>{comment.createdAt}</Moment>
+                  </span>
+                  {/*</h5>*/}
                   <p className="card-text">{comment.body}</p>
                 </div>
               </div>

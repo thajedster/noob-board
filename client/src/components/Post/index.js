@@ -39,7 +39,7 @@ class Post extends Component {
           <div id="post" className="card">
             <div className="card-body">
               <h2>{title}</h2>
-              <h6>
+              <h6 className="text-muted">
                 by {userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
               </h6>
               <p>{body}</p>
