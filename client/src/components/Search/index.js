@@ -21,21 +21,28 @@ class Search extends Component {
     this.setState(
       {
         query: this.search.value
-      },
-      () => {
-        if (this.state.query && this.state.query.length > 1) {
-          if (this.state.query.length % 2 === 0) {
-            this.getPost();
-          }
-        }
       }
+      // },
+      // () => {
+      //   if (this.state.query && this.state.query.length > 1) {
+      //     if (this.state.query.length % 2 === 0) {
+      //       this.getPost();
+      //     }
+      //   }
+      // }
     );
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.getPost();
   };
 
   render() {
     return (
       <form>
         <input placeholder="Search for..." ref={input => (this.search = input)} onChange={this.handleInputChange} />
+        <input type="submit" value="Search" onClick={this.handleSubmit} />
         <Suggestions results={this.state.results} />
         {/* <p>{this.state.query}</p> */}
       </form>
