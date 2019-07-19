@@ -8,7 +8,8 @@ class Signup extends React.Component {
     password: "",
     userName: "",
     firstName: "",
-    lastName: ""
+    lastName: "",
+    error: ""
   };
 
   handleChange = event => {
@@ -22,23 +23,35 @@ class Signup extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     const { updateState, history } = this.props;
-    axios
-      .post("/signup", {
-        email: this.state.email,
-        password: this.state.password,
-        userName: this.state.userName,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName
-      })
-      .then(res => {
-        updateState({ loggedIn: true, userId: res.data._id });
-        history.push("/");
-      })
-      .catch(function(err) {
-        //TODO: error handling
-        //create handle for email with no @ (regex)
-        console.log(err);
-      });
+    if (this.state.email === "") {
+      this.setState({ error: "cannot have an empty e-mail field!" });
+    } else if (this.state.firstName === "") {
+      this.setState({ error: "you must enter a first name" });
+    } else if (this.state.lastName === "") {
+      this.setState({ error: "you must enter a last name" });
+    } else if (this.state.password === "") {
+      this.setState({ error: "you must enter a password" });
+    } else if (this.state.password.length < 5) {
+      this.setState({ error: "password must be at least 5 characters long" });
+    } else {
+      axios
+        .post("/signup", {
+          email: this.state.email,
+          password: this.state.password,
+          userName: this.state.userName,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName
+        })
+        .then(res => {
+          updateState({ loggedIn: true, userId: res.data._id });
+          history.push("/");
+        })
+        .catch(function(err) {
+          //TODO: error handling
+          //create handle for email with no @ (regex)
+          console.log(err);
+        });
+    }
   };
 
   render() {
@@ -51,21 +64,41 @@ class Signup extends React.Component {
               <label>
                 First Name:
                 <input type="text" name="firstName" onChange={this.handleChange} value={this.state.firstName} />
+                {this.state.error && (
+                  <small className="form-text" style={{ color: "red" }}>
+                    {this.state.error}
+                  </small>
+                )}
               </label>
               <br />
               <label>
                 Last Name:
                 <input type="text" name="lastName" onChange={this.handleChange} value={this.state.lastName} />
+                {this.state.error && (
+                  <small className="form-text" style={{ color: "red" }}>
+                    {this.state.error}
+                  </small>
+                )}
               </label>
               <br />
               <label>
                 Username:
                 <input type="text" name="userName" onChange={this.handleChange} value={this.state.userName} />
+                {this.state.error && (
+                  <small className="form-text" style={{ color: "red" }}>
+                    {this.state.error}
+                  </small>
+                )}
               </label>
               <br />
               <label>
                 E-mail:
                 <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
+                {this.state.error && (
+                  <small className="form-text" style={{ color: "red" }}>
+                    {this.state.error}
+                  </small>
+                )}
               </label>
               <br />
               <label>
