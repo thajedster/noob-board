@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 import ClampLines from "react-clamp-lines";
 import "./style.css";
 
@@ -34,8 +35,11 @@ function Topics(props) {
                     <span />
                   )}
                   <Link to={"/post/" + item.id}>
-                    <h3>{item.title}</h3>
+                    <h3 className="d-inline-block">{item.title}</h3>
                   </Link>
+                  <span className="h6 text-muted d-inline-block float-right">
+                    <Moment fromNow>{item.createdAt}</Moment>
+                  </span>
                 </div>
                 <ClampLines
                   text={item.body}
