@@ -1,12 +1,16 @@
+html {
+  --primary-navbar: #301d27;
+  --primary-bg: #d9c4a0;
+  --secondary-bg: #f2ddb9;
+}
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-top: 76px;
-  background-color: white;
+  background-color: var(--primary-bg);
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

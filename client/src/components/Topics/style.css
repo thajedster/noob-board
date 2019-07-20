@@ -1,0 +1,6 @@
+#top-topics .card {
+  background-color: var(--secondary-bg);
+}
+#topics-title {
+  color: var(--primary-navbar);
+}

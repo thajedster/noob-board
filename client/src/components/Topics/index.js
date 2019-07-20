@@ -13,7 +13,7 @@ function Topics(props) {
   return (
     <div className="row pt-3">
       <div className="col-12 col-md-8 mx-auto">
-        <div id="topics-title" className="text-muted mb-3">
+        <div id="topics-title" className="mb-3">
           <h1>Hot Topics</h1>
         </div>
         <div id="top-topics">
