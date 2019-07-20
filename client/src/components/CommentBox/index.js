@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Moment from "react-moment";
 
 class CommentBox extends React.Component {
   constructor() {
@@ -48,10 +49,13 @@ class CommentBox extends React.Component {
             {comments.map(comment => (
               <div className="card mb-3" key={comment._id}>
                 <div className="card-body">
-                  <p className="card-text">{comment.body}</p>
                   <h5 className="card-title">
-                    {userName} <span className="h6 text-muted float-right" />
+                    {userName}
+                    <span className="h6 text-muted float-right">
+                      <Moment fromNow>{comment.createdAt}</Moment>
+                    </span>
                   </h5>
+                  <p className="card-text">{comment.body}</p>
                 </div>
               </div>
             ))}

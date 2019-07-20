@@ -39,9 +39,26 @@ class Form extends Component {
     event.preventDefault();
     const { title, body } = this.state;
     const { userId, history } = this.props;
-    axios.post("/api/post", { title: title, body: body, author: userId }).then(({ data }) => {
-      history.push(`/post/${data._id}`);
-    });
+    axios
+      .post("/api/post", { title: title, body: body, author: userId })
+      .then(({ data }) => {
+        history.push(`/post/${data._id}`);
+      })
+      .catch(error => {
+        // Response
+        if (error.response) {
+          if (error.response.status === 401) return window.location.replace("/login");
+          console.log("error.response");
+          console.log(error);
+          // Request
+        } else if (error.request) {
+          console.log("error.request");
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error during setting up request", error.message);
+        }
+      });
   };
 
   render() {
