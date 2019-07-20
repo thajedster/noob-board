@@ -8,8 +8,7 @@ class CommentBox extends React.Component {
 
     this.state = {
       showComments: true,
-      comment: "",
-      user: ""
+      users: []
     };
   }
 
@@ -18,20 +17,28 @@ class CommentBox extends React.Component {
   }
 
   loadUser = () => {
-    this.props.comments.map(comment =>
+    this.props.comments.forEach(comment => {
       axios.get("/api/user/" + comment.author).then(res => {
-        console.log(res.data);
-        this.setState({
-          user: res.data
-        });
-      })
-    );
+        let users = [...this.state.users];
+        users.push({ id: res.data._id, userName: res.data.userName });
+        this.setState({ users });
+      });
+    });
+  };
+
+  matchUser = author => {
+    const { users } = this.state;
+    const index = users.findIndex(user => user.id === author);
+    if (index > -1) {
+      return users[index].userName;
+    } else {
+      return "";
+    }
   };
 
   render() {
     const { comments } = this.props;
     const { showComments } = this.state;
-    const { userName } = this.state.user;
 
     return (
       <div id="comment-box" className="col-12 col-md-10 col-lg-8">
@@ -50,7 +57,7 @@ class CommentBox extends React.Component {
               <div className="card mb-3" key={comment._id}>
                 <div className="card-body">
                   <h5 className="card-title">
-                    {userName}
+                    {this.matchUser(comment.author)}
                     <span className="h6 text-muted float-right">
                       <Moment fromNow>{comment.createdAt}</Moment>
                     </span>
