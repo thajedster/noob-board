@@ -1,17 +1,36 @@
 import React from "react";
+import axios from "axios";
 
 class CommentBox extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      showComments: true
+      showComments: true,
+      comment: "",
+      user: ""
     };
   }
+
+  componentDidMount() {
+    this.loadUser();
+  }
+
+  loadUser = () => {
+    this.props.comments.map(comment =>
+      axios.get("/api/user/" + comment.author).then(res => {
+        console.log(res.data);
+        this.setState({
+          user: res.data
+        });
+      })
+    );
+  };
 
   render() {
     const { comments } = this.props;
     const { showComments } = this.state;
+    const { userName } = this.state.user;
 
     return (
       <div id="comment-box" className="col-12 col-md-10 col-lg-8">
@@ -29,10 +48,10 @@ class CommentBox extends React.Component {
             {comments.map(comment => (
               <div className="card mb-3" key={comment._id}>
                 <div className="card-body">
-                  {/*<h5 className="card-title">
-                    Guest <span className="h6 text-muted float-right">2 hours ago</span>
-                  </h5>*/}
                   <p className="card-text">{comment.body}</p>
+                  <h5 className="card-title">
+                    {userName} <span className="h6 text-muted float-right" />
+                  </h5>
                 </div>
               </div>
             ))}

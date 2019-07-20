@@ -52,8 +52,8 @@ class Bio extends Component {
         <div className="card">
           <img src={logo} className="card-img-top" alt="logo" />
           <div className="card-body">
-            <p className="card-text">Name: {name}</p>
-            <p className="card-text">User Name: {userName}</p>
+            <p className="card-text">{name}</p>
+            <p className="card-text">{userName}</p>
             <p className="card-text">Email: {email}</p>
           </div>
           <div className="userPosts">

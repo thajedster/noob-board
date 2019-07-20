@@ -84,7 +84,7 @@ class TopicsContainer extends Component {
       });
   }
 
-  checkFavorites = (topics, favourites) => {
+  checkFavorites = (topics, favourites) => {  
     //check each post if it is listed as a favourite
     topics.forEach((topic, index) => {
       let findResult = favourites.findIndex(favourite => {
