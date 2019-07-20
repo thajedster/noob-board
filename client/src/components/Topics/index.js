@@ -13,11 +13,10 @@ function Topics(props) {
   return (
     <div className="row pt-3">
       <div className="col-12 col-md-8 mx-auto">
-        <div className="topics-title">
+        <div id="topics-title" className="text-muted mb-3">
           <h1>Hot Topics</h1>
         </div>
-
-        <div className="top-topics">
+        <div id="top-topics">
           {props.topics.map(item => (
             <div className="card mb-3" key={item.id}>
               <div className="card-body">
