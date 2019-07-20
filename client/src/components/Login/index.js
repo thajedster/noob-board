@@ -41,15 +41,23 @@ class Login extends Component {
           <h2 className="display-4">Login Here!</h2>
           <form className="text-left" onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" className="form-control" value={email} onChange={this.handleChange} />
+              <label htmlFor="email" />
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                placeholder="Email"
+                value={email}
+                onChange={this.handleChange}
+              />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password" />
               <input
                 type="password"
                 name="password"
                 className="form-control"
+                placeholder="Password"
                 value={password}
                 onChange={this.handleChange}
                 required
