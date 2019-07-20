@@ -5,6 +5,7 @@ const comment = require("../controllers/comment");
 
 function ensureAuthenticated(req, res, next) {
   if (!req.isAuthenticated()) {
+    console.log("401 Unautorized");
     return res.status(401).end("Unauthorized");
   }
   next();
@@ -19,7 +20,7 @@ module.exports = app => {
       user.findAll(req, res);
     }
   });
-  app.get("/api/user/:id", (req, res) => {
+  app.get("/api/user/:id", ensureAuthenticated, (req, res) => {
     user.findById(req, res);
   });
   app.post("/api/user", ensureAuthenticated, (req, res) => {

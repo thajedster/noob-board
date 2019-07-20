@@ -16,17 +16,54 @@ class Post extends Component {
 
   loadPost = () => {
     let id = this.props.match.params.id;
-    axios.get("/api/post/" + id).then(res => {
-      this.setState({
-        post: res.data
-      });
-
-      axios.get("/api/user/" + this.state.post.author._id).then(res => {
+    axios
+      .get("/api/post/" + id)
+      .then(res => {
         this.setState({
-          user: res.data
+          post: res.data
         });
+
+        axios
+          .get("/api/user/" + this.state.post.author._id)
+          .then(res => {
+            this.setState({
+              user: res.data
+            });
+          })
+          .catch(error => {
+            // Response
+            if (error.response) {
+              if (error.response.status === 401) return window.location.replace("/login");
+              console.log("error.response");
+              console.log(error);
+              // Request
+            } else if (error.request) {
+              console.log("error.request");
+              console.log(error.request);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log("Error during setting up request", error.message);
+            }
+          });
+      })
+      .catch(error => {
+        // Response
+        if (error.response) {
+          if (error.response.status === 401) {
+            this.props.updateState({ loggedIn: false, userId: null });
+            this.props.history.push("/login");
+          }
+          console.log("error.response");
+          console.log(error);
+          // Request
+        } else if (error.request) {
+          console.log("error.request");
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error during setting up request", error.message);
+        }
       });
-    });
   };
 
   render() {
@@ -49,7 +86,11 @@ class Post extends Component {
             </div>
           </div>
           <hr />
-          {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
+          {loggedIn ? (
+            <CommentForm updateState={this.updateState} postId={id} userId={userId} refresh={this.loadPost} />
+          ) : (
+            <div />
+          )}
           {comments ? <CommentBox comments={comments} /> : <div />}
         </div>
       </div>
