@@ -86,11 +86,7 @@ class Post extends Component {
             </div>
           </div>
           <hr />
-          {loggedIn ? (
-            <CommentForm updateState={this.updateState} postId={id} userId={userId} refresh={this.loadPost} />
-          ) : (
-            <div />
-          )}
+          {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
           {comments ? <CommentBox comments={comments} /> : <div />}
         </div>
       </div>
