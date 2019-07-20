@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Moment from "react-moment";
 
 class CommentBox extends React.Component {
@@ -6,9 +7,34 @@ class CommentBox extends React.Component {
     super();
 
     this.state = {
-      showComments: true
+      showComments: true,
+      users: []
     };
   }
+
+  componentDidMount() {
+    this.loadUser();
+  }
+
+  loadUser = () => {
+    this.props.comments.forEach(comment => {
+      axios.get("/api/user/" + comment.author).then(res => {
+        let users = [...this.state.users];
+        users.push({ id: res.data._id, userName: res.data.userName });
+        this.setState({ users });
+      });
+    });
+  };
+
+  matchUser = author => {
+    const { users } = this.state;
+    const index = users.findIndex(user => user.id === author);
+    if (index > -1) {
+      return users[index].userName;
+    } else {
+      return "";
+    }
+  };
 
   render() {
     const { comments } = this.props;
@@ -30,12 +56,12 @@ class CommentBox extends React.Component {
             {comments.map(comment => (
               <div className="card mb-3" key={comment._id}>
                 <div className="card-body">
-                  {/*<h5 className="card-title">
-                    Guest*/}
-                  <span className="h6 text-muted float-right">
-                    <Moment fromNow>{comment.createdAt}</Moment>
-                  </span>
-                  {/*</h5>*/}
+                  <h5 className="card-title">
+                    {this.matchUser(comment.author)}
+                    <span className="h6 text-muted float-right">
+                      <Moment fromNow>{comment.createdAt}</Moment>
+                    </span>
+                  </h5>
                   <p className="card-text">{comment.body}</p>
                 </div>
               </div>
