@@ -2,14 +2,14 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logout from "../Logout";
 import "./style.css";
-import logo from "../Navbar/noob-logo.png";
+import logo from "../../images/noob-logo.png";
 
 const Navbar = props => {
   const { updateState, loggedIn } = props;
   return (
     <nav className="navbar navbar-expand-sm navbar-light fixed-top">
       <Link to="/" className="navbar-brand">
-        <img src={logo} alt={"logo"} />
+        <img width={50} height={50} src={logo} alt="" />
       </Link>
       <button className="navbar-toggler" data-toggle="collapse" data-target="#navbar-content">
         <span className="navbar-toggler-icon" />

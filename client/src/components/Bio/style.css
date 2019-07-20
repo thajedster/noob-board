@@ -1,6 +1,4 @@
-.bio .card > img {
-  width: 8rem;
-  height: 8rem;
-  display: flex;
-  flex-wrap: wrap;
+.avatar {
+  border-radius: 50%;
+  margin: 15px;
 }

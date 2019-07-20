@@ -5,7 +5,8 @@ import Suggestions from "../Suggestions";
 class Search extends Component {
   state = {
     query: "",
-    results: []
+    results: [],
+    showResults: false
   };
 
   //axios call to search database
@@ -36,16 +37,33 @@ class Search extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.getPost();
+    this.setState({ showResults: true });
   };
 
   render() {
+    const { results, showResults } = this.state;
     return (
-      <form>
-        <input placeholder="Search for..." ref={input => (this.search = input)} onChange={this.handleInputChange} />
-        <input type="submit" value="Search" onClick={this.handleSubmit} />
-        <Suggestions results={this.state.results} />
-        {/* <p>{this.state.query}</p> */}
-      </form>
+      <div className="row pt-5">
+        <div className="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
+          <form id="search" className="mb-5">
+            <div className="input-group">
+              <input
+                className="form-control"
+                placeholder="Search for..."
+                ref={input => (this.search = input)}
+                onChange={this.handleInputChange}
+              />
+              <div className="input-group-append">
+                <input className="btn btn-primary" type="submit" value="Search" onClick={this.handleSubmit} />
+              </div>
+            </div>
+          </form>
+          <div id="search-results" className={showResults ? "card mb-3" : "card mb-3 d-none"}>
+            <div className="card-header">Results</div>
+            <Suggestions results={results} />
+          </div>
+        </div>
+      </div>
     );
   }
 }
