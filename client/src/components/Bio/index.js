@@ -29,8 +29,23 @@ class Bio extends Component {
 
         this.setState({ name: `${firstName} ${lastName}`, userName, email });
       })
-      .catch(err => {
-        console.log(err);
+      .catch(error => {
+        // Response
+        if (error.response) {
+          if (error.response.status === 401) {
+            this.props.updateState({ loggedIn: false, userId: null });
+            this.props.history.push("/login");
+          }
+          console.log("error.response");
+          console.log(error);
+          // Request
+        } else if (error.request) {
+          console.log("error.request");
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error during setting up request", error.message);
+        }
       });
   }
 

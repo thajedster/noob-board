@@ -39,15 +39,33 @@ class TopicsContainer extends Component {
 
     // wait for both preceeding axios calls to finish before proceeding
     // both responses will be push into an array
-    Promise.all(promise).then(responses => {
-      let topics = responses[0].data;
-      let favourites = [];
-      if (loggedIn) {
-        favourites = responses[1].data.favourites;
-      }
+    Promise.all(promise)
+      .then(responses => {
+        console.log("Promise.all responses", responses);
+        let topics = responses[0].data;
+        let favourites = [];
+        if (loggedIn) {
+          favourites = responses[1].data.favourites;
+        }
 
-      this.checkFavorites(topics, favourites);
-    });
+        this.checkFavorites(topics, favourites);
+      })
+      .catch(error => {
+        // Response
+        if (error.response) {
+          if (error.response.status === 401) return window.location.replace("/login");
+
+          console.log("error.response");
+          console.log(error);
+          // Request
+        } else if (error.request) {
+          console.log("error.request");
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error during setting up request", error.message);
+        }
+      });
   };
 
   getMyFavouritePosts() {
@@ -78,9 +96,21 @@ class TopicsContainer extends Component {
             console.log(err);
           });
       })
-      .catch(err => {
-        console.log("ERROR retrieiving user's favourite posts");
-        console.log(err);
+      .catch(error => {
+        // Response
+        if (error.response) {
+          if (error.response.status === 401) return window.location.replace("/login");
+
+          console.log("error.response");
+          console.log(error);
+          // Request
+        } else if (error.request) {
+          console.log("error.request");
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error during setting up request", error.message);
+        }
       });
   }
 
@@ -111,8 +141,21 @@ class TopicsContainer extends Component {
         this.checkFavorites(topics, favourites);
         this.setState({ error: "" });
       })
-      .catch(err => {
-        this.setState({ error: err });
+      .catch(error => {
+        // Response
+        if (error.response) {
+          if (error.response.status === 401) return window.location.replace("/login");
+
+          console.log("error.response");
+          console.log(error);
+          // Request
+        } else if (error.request) {
+          console.log("error.request");
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error during setting up request", error.message);
+        }
       });
   };
 

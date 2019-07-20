@@ -5,6 +5,7 @@ const comment = require("../controllers/comment");
 
 function ensureAuthenticated(req, res, next) {
   if (!req.isAuthenticated()) {
+    console.log("401 Unautorized");
     return res.status(401).end("Unauthorized");
   }
   next();
