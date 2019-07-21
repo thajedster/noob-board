@@ -2,7 +2,7 @@ const Post = require("../models/Post");
 
 exports.findAll = (req, res) => {
   let filter = {},
-    sort = {};
+    sort = { createdAt: "desc" };
   if (req.query._id) {
     filter = { _id: req.query._id };
   }
