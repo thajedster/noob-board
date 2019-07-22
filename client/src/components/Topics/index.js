@@ -18,7 +18,7 @@ function Topics(props) {
         </div>
         <div id="top-topics">
           {props.topics.map(item => (
-            <div className="card mb-3" key={item.id}>
+            <div className="card mb-3 custom-bg-secondary" key={item.id}>
               <div className="card-body">
                 <div className="card-title">
                   {props.loggedIn ? (

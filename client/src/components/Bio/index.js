@@ -65,7 +65,7 @@ class Bio extends Component {
     return (
       <div className="row pt-3">
         <div className="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
-          <div id="bio" className="card mb-3">
+          <div id="bio" className="card mb-3 custom-bg-secondary">
             <div className="row no-gutters">
               <div className="col-4">
                 <img width={100} height={100} src={avatar} className="avatar" alt="" />
@@ -78,8 +78,8 @@ class Bio extends Component {
               </div>
             </div>
           </div>
-          <div id="userPosts" className="card mb-3">
-            <div className="card-header">Your Posts</div>
+          <div id="userPosts" className="card mb-3 border-0">
+            <div className="card-header custom-bg-nav text-white">Your Posts</div>
             <Suggestions results={this.state.results} />
           </div>
         </div>
