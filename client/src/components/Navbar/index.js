@@ -17,27 +17,27 @@ const Navbar = props => {
       <div className="collapse navbar-collapse" id="navbar-content">
         {loggedIn ? (
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
               <NavLink exact to="/" className="nav-link">
                 Home
               </NavLink>
             </li>
-            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
               <NavLink to="/profile" className="nav-link">
                 Profile
               </NavLink>
             </li>
-            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
               <NavLink to="/question" className="nav-link">
                 Ask Question
               </NavLink>
             </li>
-            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
               <NavLink to="/favourites" className="nav-link">
                 Favourites
               </NavLink>
             </li>
-            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
               <NavLink to="/search" className="nav-link">
                 Search for Post
               </NavLink>
@@ -45,7 +45,7 @@ const Navbar = props => {
           </ul>
         ) : (
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
               <NavLink exact to="/" className="nav-link">
                 Home
               </NavLink>
@@ -59,12 +59,12 @@ const Navbar = props => {
         ) : (
           <div className="navbar-nav ml-auto">
             <Link to="/signup">
-              <button className="btn btn-primary ml-2" data-toggle="collapse" data-target="#navbar-content">
+              <button className="btn btn-primary ml-2" data-toggle="collapse" data-target=".navbar-collapse.show">
                 Sign Up
               </button>
             </Link>
             <Link to="/login">
-              <button className="btn btn-primary ml-2" data-toggle="collapse" data-target="#navbar-content">
+              <button className="btn btn-primary ml-2" data-toggle="collapse" data-target=".navbar-collapse.show">
                 Sign In
               </button>
             </Link>
