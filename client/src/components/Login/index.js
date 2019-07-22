@@ -4,7 +4,8 @@ import auth from "../../utils/auth";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    hasError: false
   };
 
   handleChange = e => {
@@ -29,6 +30,7 @@ class Login extends Component {
         history.push("/");
       })
       .catch(err => {
+        this.setState({ hasError: true });
         console.log(err);
       });
   };
@@ -37,8 +39,15 @@ class Login extends Component {
     const { email, password } = this.state;
     return (
       <div className="row">
-        <div className="col-6 mx-auto" id="login">
-          <h2 className="display-4">Login Here!</h2>
+        <div className="col-sm-10 col-md-6 mx-auto" id="login">
+          {this.state.hasError ? (
+            <div className="text-center">
+              <p className="bg-danger text-white"> Your email or password is incorrect</p>
+            </div>
+          ) : (
+            <div />
+          )}
+          <h1>Login Here!</h1>
           <form className="text-left" onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
