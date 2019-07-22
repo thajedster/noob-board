@@ -17,27 +17,27 @@ const Navbar = props => {
       <div className="collapse navbar-collapse" id="navbar-content">
         {loggedIn ? (
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
+            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
               <NavLink exact to="/" className="nav-link">
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
               <NavLink to="/profile" className="nav-link">
                 Profile
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
               <NavLink to="/question" className="nav-link">
                 Ask Question
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
               <NavLink to="/favourites" className="nav-link">
                 Favourites
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
               <NavLink to="/search" className="nav-link">
                 Search for Post
               </NavLink>
@@ -45,7 +45,7 @@ const Navbar = props => {
           </ul>
         ) : (
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
+            <li className="nav-item" data-toggle="collapse" data-target="#navbar-content">
               <NavLink exact to="/" className="nav-link">
                 Home
               </NavLink>
@@ -59,10 +59,14 @@ const Navbar = props => {
         ) : (
           <div className="navbar-nav ml-auto">
             <Link to="/signup">
-              <button className="btn btn-primary ml-2">Sign Up</button>
+              <button className="btn btn-primary ml-2" data-toggle="collapse" data-target="#navbar-content">
+                Sign Up
+              </button>
             </Link>
             <Link to="/login">
-              <button className="btn btn-primary ml-2">Sign In</button>
+              <button className="btn btn-primary ml-2" data-toggle="collapse" data-target="#navbar-content">
+                Sign In
+              </button>
             </Link>
           </div>
         )}

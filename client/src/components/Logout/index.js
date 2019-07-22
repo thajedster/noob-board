@@ -16,7 +16,12 @@ class Logout extends Component {
 
   render() {
     return (
-      <button className="btn btn-primary ml-2" onClick={this.handleClick}>
+      <button
+        className="btn btn-primary ml-2"
+        onClick={this.handleClick}
+        data-toggle="collapse"
+        data-target="#navbar-content"
+      >
         Sign Out
       </button>
     );
