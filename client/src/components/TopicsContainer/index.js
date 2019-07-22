@@ -5,7 +5,8 @@ import axios from "axios";
 class TopicsContainer extends Component {
   state = {
     topics: [],
-    favourites: []
+    favourites: [],
+    recentlySelectedPost: 0 //id of a post that is to be added/removed from favourites
   };
 
   componentDidMount() {
@@ -41,7 +42,6 @@ class TopicsContainer extends Component {
     // both responses will be push into an array
     Promise.all(promise)
       .then(responses => {
-        console.log("Promise.all responses", responses);
         let topics = responses[0].data;
         let favourites = [];
         if (loggedIn) {
@@ -126,22 +126,25 @@ class TopicsContainer extends Component {
     this.setState({ topics: topics, favourites: favourites });
   };
 
-  onClickFavouriteButton = postID => {
-    let topics = this.state.topics;
-    // find which post has this postId
-    let postIndex = topics.findIndex(topic => {
-      return topic.id === postID;
-    });
+  onClickFavouriteButton = postId => {
+    //store the postId
+    this.setState({ recentlySelectedPost: postId });
+
+    //toggle the status of the heart icon
+    // don't get postId from 'state' since the setState above is async
+    this.toggleFavouriteStatus(postId);
 
     // save the postId into this user's favourites
     axios
-      .put("/api/user/favourites", { userId: this.props.userId, postId: this.state.topics[postIndex]._id })
+      .put("/api/user/favourites", { userId: this.props.userId, postId: postId })
       .then(response => {
+        let topics = this.state.topics;
         let favourites = response.data.favourites;
         this.checkFavorites(topics, favourites);
-        this.setState({ error: "" });
       })
       .catch(error => {
+        // undo the toggle
+        this.toggleFavouriteStatus(this.state.recentlySelectedPost);
         // Response
         if (error.response) {
           if (error.response.status === 401) return window.location.replace("/login");
@@ -158,6 +161,19 @@ class TopicsContainer extends Component {
         }
       });
   };
+
+  toggleFavouriteStatus(postId) {
+    let { topics } = this.state;
+
+    // find which post has this postId
+    let postIndex = topics.findIndex(topic => {
+      return topic.id === postId;
+    });
+
+    // toggle the status
+    topics[postIndex].isFavourite = !topics[postIndex].isFavourite;
+    this.setState({ topics: topics });
+  }
 
   render() {
     return (
