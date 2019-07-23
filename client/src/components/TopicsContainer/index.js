@@ -20,9 +20,6 @@ class TopicsContainer extends Component {
       // show all favourite posts
     } else if (pathname === "/favourites") {
       this.getMyFavouritePosts();
-      // show all posts by this user
-    } else if (pathname === "/myposts") {
-      this.getMyPosts();
     }
   }
 
@@ -181,6 +178,7 @@ class TopicsContainer extends Component {
         topics={this.state.topics}
         onClickFavouriteButton={this.onClickFavouriteButton}
         loggedIn={this.props.loggedIn}
+        pathname={this.state.pathname}
       />
     );
   }
