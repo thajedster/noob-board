@@ -29,6 +29,9 @@ module.exports = app => {
   app.put("/api/user/favourites", ensureAuthenticated, (req, res) => {
     favourites.update(req, res);
   });
+  app.put("/api/user/password", ensureAuthenticated, (req, res) => {
+    user.changePassword(req, res);
+  });
   app.put("/api/user/:id", ensureAuthenticated, (req, res) => {
     user.update(req, res);
   });

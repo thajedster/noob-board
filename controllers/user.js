@@ -77,3 +77,26 @@ exports.destroy = (req, res) => {
       res.status(500).json(err);
     });
 };
+
+exports.changePassword = (req, res) => {
+  // {id, oldPassword, newPassword} = req.body
+  console.log(req.body);
+  //retrive user info
+  User.findById(req.body.id, "+password")
+    .then(user => {
+      // confirm that the oldPassword is correct before proceeding
+      if (!user.comparePassword(req.body.oldPassword, user.password)) {
+        res.status(401).send("Password is incorrect");
+      }
+      // hash the new password
+      user.password = user.hashPassword(req.body.newPassword);
+      // save user
+      User.findOneAndUpdate({ _id: req.body.id }, user, { new: true }).then(data => {
+        res.send("Success");
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+};
