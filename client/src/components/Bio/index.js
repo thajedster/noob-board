@@ -22,12 +22,8 @@ class Bio extends Component {
     axios
       .get(`/api/user/${userId}`)
       .then(res => {
-        const { firstName, lastName, userName, email } = res.data;
-        this.setState({
-          results: res.data.posts
-        });
-
-        this.setState({ name: `${firstName} ${lastName}`, userName, email });
+        const { firstName, lastName, userName, email, posts } = res.data;
+        this.setState({ name: `${firstName} ${lastName}`, userName, email, results: posts });
       })
       .catch(error => {
         // Response
@@ -57,11 +53,8 @@ class Bio extends Component {
     }
   }
 
-  //TODO: create links to each post
-  //store res data in array in state
-  //after render, create link to
   render() {
-    const { name, userName } = this.state;
+    const { name, userName, results } = this.state;
     return (
       <div className="row pt-3">
         <div className="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
@@ -80,7 +73,7 @@ class Bio extends Component {
           </div>
           <div id="userPosts" className="card mb-3 border-0">
             <div className="card-header custom-bg-nav text-white">Your Posts</div>
-            <Suggestions results={this.state.results} />
+            <Suggestions results={results} />
           </div>
         </div>
       </div>
