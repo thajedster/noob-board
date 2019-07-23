@@ -1,7 +1,9 @@
 html {
   --primary-nav: #301d27;
   --primary-bg: #d9c4a0;
-  --secondary-bg: #f2ddb9;
+  /*--secondary-bg: #f2ddb9;
+  --primary-bg: #f2ddb9;*/
+  --secondary-bg: #fff7d3;
 }
 body {
   margin: 0;
@@ -21,5 +23,9 @@ code {
   background-color: var(--primary-bg);
 }
 .custom-bg-secondary {
+  background-color: var(--secondary-bg);
+}
+input.custom-bg-secondary:focus,
+textarea.custom-bg-secondary:focus {
   background-color: var(--secondary-bg);
 }

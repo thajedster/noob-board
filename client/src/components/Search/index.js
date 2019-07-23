@@ -65,7 +65,7 @@ class Search extends Component {
           <form id="search" className="mb-5">
             <div className="input-group">
               <input
-                className="form-control"
+                className="form-control form-control-lg custom-bg-secondary border-secondary"
                 placeholder="Search for..."
                 ref={input => (this.search = input)}
                 onChange={this.handleInputChange}
