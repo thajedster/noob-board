@@ -8,6 +8,7 @@ import Bio from "./components/Bio";
 import Form from "./components/Form/Form";
 import Post from "./components/Post";
 import Search from "./components/Search";
+import Password from "./components/Password";
 
 class App extends Component {
   state = {
@@ -86,6 +87,13 @@ class App extends Component {
                 exact
                 path="/post/:id"
                 render={props => <Post {...props} updateState={this.updateState} loggedIn={loggedIn} userId={userId} />}
+              />
+              <Route
+                exact
+                path="/password"
+                render={props => (
+                  <Password {...props} updateState={this.updateState} loggedIn={loggedIn} userId={userId} />
+                )}
               />
               <Redirect to="/" />
             </Switch>
