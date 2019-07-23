@@ -61,75 +61,74 @@ class Signup extends React.Component {
           <div className="container">
             <h2 className="display-4">Sign Up Now!</h2>
             <form className="userForm">
-              <label>
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  onChange={this.handleChange}
-                  value={this.state.firstName}
-                />
-                {this.state.error && (
-                  <small className="form-text" style={{ color: "red" }}>
-                    {this.state.error}
-                  </small>
-                )}
-              </label>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                onChange={this.handleChange}
+                value={this.state.firstName}
+              />
+              {this.state.error && (
+                <small className="form-text" style={{ color: "red" }}>
+                  {this.state.error}
+                </small>
+              )}
+
               <br />
-              <label>
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  onChange={this.handleChange}
-                  value={this.state.lastName}
-                />
-                {this.state.error && (
-                  <small className="form-text" style={{ color: "red" }}>
-                    {this.state.error}
-                  </small>
-                )}
-              </label>
+
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                onChange={this.handleChange}
+                value={this.state.lastName}
+              />
+              {this.state.error && (
+                <small className="form-text" style={{ color: "red" }}>
+                  {this.state.error}
+                </small>
+              )}
+
               <br />
-              <label>
-                <input
-                  type="text"
-                  name="userName"
-                  placeholder="Username"
-                  onChange={this.handleChange}
-                  value={this.state.userName}
-                />
-                {this.state.error && (
-                  <small className="form-text" style={{ color: "red" }}>
-                    {this.state.error}
-                  </small>
-                )}
-              </label>
+
+              <input
+                type="text"
+                name="userName"
+                placeholder="Username"
+                onChange={this.handleChange}
+                value={this.state.userName}
+              />
+              {this.state.error && (
+                <small className="form-text" style={{ color: "red" }}>
+                  {this.state.error}
+                </small>
+              )}
+
               <br />
-              <label>
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="E-mail"
-                  onChange={this.handleChange}
-                  value={this.state.email}
-                />
-                {this.state.error && (
-                  <small className="form-text" style={{ color: "red" }}>
-                    {this.state.error}
-                  </small>
-                )}
-              </label>
+
+              <input
+                type="text"
+                name="email"
+                placeholder="E-mail"
+                onChange={this.handleChange}
+                value={this.state.email}
+              />
+              {this.state.error && (
+                <small className="form-text" style={{ color: "red" }}>
+                  {this.state.error}
+                </small>
+              )}
+
               <br />
-              <label>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                  value={this.state.password}
-                />
-              </label>
+
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={this.handleChange}
+                value={this.state.password}
+              />
+
               <br />
               <input type="submit" value="Submit" onClick={this.handleSubmit} />
             </form>

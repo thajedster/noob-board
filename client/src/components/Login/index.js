@@ -50,7 +50,6 @@ class Login extends Component {
           <h1>Login Here!</h1>
           <form className="text-left" onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="email" />
               <input
                 type="email"
                 name="email"
@@ -61,7 +60,6 @@ class Login extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password" />
               <input
                 type="password"
                 name="password"
