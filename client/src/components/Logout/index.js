@@ -20,7 +20,7 @@ class Logout extends Component {
         className="btn btn-primary ml-2"
         onClick={this.handleClick}
         data-toggle="collapse"
-        data-target="#navbar-content"
+        data-target=".navbar-collapse.show"
       >
         Sign Out
       </button>
