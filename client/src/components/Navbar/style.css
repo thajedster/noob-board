@@ -4,3 +4,7 @@
 .nav-link {
   display: inline-block;
 }
+
+.dropdown-toggle:after {
+  content: none;
+}
