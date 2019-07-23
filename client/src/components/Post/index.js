@@ -73,7 +73,7 @@ class Post extends Component {
     return (
       <div className="row pt-3">
         <div className="col-12 col-md-8 mx-auto">
-          <div id="post" className="card">
+          <div id="post" className="card custom-bg-secondary">
             <div className="card-body">
               <h2>{title}</h2>
               <h6 className="text-muted">

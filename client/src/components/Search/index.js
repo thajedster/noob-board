@@ -65,7 +65,7 @@ class Search extends Component {
           <form id="search" className="mb-5">
             <div className="input-group">
               <input
-                className="form-control"
+                className="form-control form-control-lg custom-bg-secondary border-secondary"
                 placeholder="Search for..."
                 ref={input => (this.search = input)}
                 onChange={this.handleInputChange}
@@ -75,8 +75,8 @@ class Search extends Component {
               </div>
             </div>
           </form>
-          <div id="search-results" className={showResults ? "card mb-3" : "card mb-3 d-none"}>
-            <div className="card-header">Results</div>
+          <div id="search-results" className={showResults ? "card mb-3 border-0" : "card mb-3 border-0 d-none"}>
+            <div className="card-header custom-bg-nav text-white">Results</div>
             <Suggestions results={results} />
           </div>
         </div>

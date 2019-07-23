@@ -53,13 +53,13 @@ class CommentForm extends Component {
         <form id="comment-form" className="mb-3">
           <div className="form-group">
             <input
-              className="form-control"
+              className="form-control custom-bg-secondary"
               value={this.state.body}
               name="body"
               onChange={this.handleInputChange}
               type="text"
               placeholder="Comment"
-              style={{ border: `1px solid ${this.state.error ? "red" : "black"}` }}
+              style={{ borderColor: `${this.state.error ? "red" : "#6c757d"}` }}
             />
             {this.state.error && (
               <small className="form-text" style={{ color: "red" }}>

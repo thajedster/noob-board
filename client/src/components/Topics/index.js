@@ -13,13 +13,12 @@ function Topics(props) {
   return (
     <div className="row pt-3">
       <div className="col-12 col-md-8 mx-auto">
-        <div className="topics-title">
-          <h1>Hot Topics</h1>
+        <div id="topics-title" className="mb-3">
+          <h1>{props.pathname === "/favourites" ? "Your Favourites" : "Hot Topics"}</h1>
         </div>
-
-        <div className="top-topics">
+        <div id="top-topics">
           {props.topics.map(item => (
-            <div className="card mb-3" key={item.id}>
+            <div className="card mb-3 custom-bg-secondary" key={item.id}>
               <div className="card-body">
                 <div className="card-title">
                   {props.loggedIn ? (
@@ -35,7 +34,7 @@ function Topics(props) {
                     <span />
                   )}
                   <Link to={"/post/" + item.id}>
-                    <h3 className="d-inline-block">{item.title}</h3>
+                    <h4 className="d-inline-block">{item.title}</h4>
                   </Link>
                   <span className="h6 text-muted d-inline-block float-right">
                     <Moment fromNow>{item.createdAt}</Moment>

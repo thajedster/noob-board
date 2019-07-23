@@ -54,7 +54,7 @@ class CommentBox extends React.Component {
         {showComments ? (
           <div id="comment-list">
             {comments.map(comment => (
-              <div className="card mb-3" key={comment._id}>
+              <div className="card mb-3 custom-bg-secondary" key={comment._id}>
                 <div className="card-body">
                   <h5 className="card-title">
                     {this.matchUser(comment.author)}
