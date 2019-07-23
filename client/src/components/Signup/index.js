@@ -62,8 +62,13 @@ class Signup extends React.Component {
             <h2 className="display-4">Sign Up Now!</h2>
             <form className="userForm">
               <label>
-                First Name:
-                <input type="text" name="firstName" onChange={this.handleChange} value={this.state.firstName} />
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  onChange={this.handleChange}
+                  value={this.state.firstName}
+                />
                 {this.state.error && (
                   <small className="form-text" style={{ color: "red" }}>
                     {this.state.error}
@@ -72,8 +77,13 @@ class Signup extends React.Component {
               </label>
               <br />
               <label>
-                Last Name:
-                <input type="text" name="lastName" onChange={this.handleChange} value={this.state.lastName} />
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  onChange={this.handleChange}
+                  value={this.state.lastName}
+                />
                 {this.state.error && (
                   <small className="form-text" style={{ color: "red" }}>
                     {this.state.error}
@@ -82,8 +92,13 @@ class Signup extends React.Component {
               </label>
               <br />
               <label>
-                Username:
-                <input type="text" name="userName" onChange={this.handleChange} value={this.state.userName} />
+                <input
+                  type="text"
+                  name="userName"
+                  placeholder="Username"
+                  onChange={this.handleChange}
+                  value={this.state.userName}
+                />
                 {this.state.error && (
                   <small className="form-text" style={{ color: "red" }}>
                     {this.state.error}
@@ -92,8 +107,13 @@ class Signup extends React.Component {
               </label>
               <br />
               <label>
-                E-mail:
-                <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="E-mail"
+                  onChange={this.handleChange}
+                  value={this.state.email}
+                />
                 {this.state.error && (
                   <small className="form-text" style={{ color: "red" }}>
                     {this.state.error}
@@ -102,8 +122,13 @@ class Signup extends React.Component {
               </label>
               <br />
               <label>
-                Password:
-                <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                  value={this.state.password}
+                />
               </label>
               <br />
               <input type="submit" value="Submit" onClick={this.handleSubmit} />
