@@ -6,8 +6,7 @@ import CommentBox from "../CommentBox";
 
 class Post extends Component {
   state = {
-    post: "",
-    user: ""
+    post: { author: {} }
   };
 
   componentDidMount() {
@@ -22,37 +21,11 @@ class Post extends Component {
         this.setState({
           post: res.data
         });
-
-        axios
-          .get("/api/user/" + this.state.post.author._id)
-          .then(res => {
-            this.setState({
-              user: res.data
-            });
-          })
-          .catch(error => {
-            // Response
-            if (error.response) {
-              if (error.response.status === 401) return window.location.replace("/login");
-              console.log("error.response");
-              console.log(error);
-              // Request
-            } else if (error.request) {
-              console.log("error.request");
-              console.log(error.request);
-            } else {
-              // Something happened in setting up the request that triggered an Error
-              console.log("Error during setting up request", error.message);
-            }
-          });
       })
       .catch(error => {
         // Response
         if (error.response) {
-          if (error.response.status === 401) {
-            this.props.updateState({ loggedIn: false, userId: null });
-            this.props.history.push("/login");
-          }
+          if (error.response.status === 401) return window.location.replace("/login");
           console.log("error.response");
           console.log(error);
           // Request
@@ -67,9 +40,8 @@ class Post extends Component {
   };
 
   render() {
-    const { _id: id, title, body, comments, createdAt } = this.state.post;
+    const { _id: id, title, body, comments, createdAt, author } = this.state.post;
     const { loggedIn, userId, history } = this.props;
-    const { userName } = this.state.user;
     return (
       <div className="row pt-3">
         <div className="col-12 col-md-8 mx-auto">
@@ -77,7 +49,7 @@ class Post extends Component {
             <div className="card-body">
               <h2>{title}</h2>
               <h6 className="text-muted">
-                by {userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
+                by {author.userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
               </h6>
               <p>{body}</p>
               <button className="btn" onClick={history.goBack}>
