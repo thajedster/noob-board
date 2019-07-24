@@ -17,7 +17,7 @@ class TopicsContainer extends Component {
     // show all posts
     if (pathname === "/") {
       this.getAllPosts();
-      // show all favourite posts
+      // show all favourite postscl
     } else if (pathname === "/favourites") {
       this.getMyFavouritePosts();
     }
@@ -76,22 +76,25 @@ class TopicsContainer extends Component {
       .get(`/api/user/${userId}`)
       .then(response => {
         favourites = response.data.favourites;
-
-        // get details of the favourite posts
-        axios
-          .get(`/api/post/`, {
-            params: {
-              _id: favourites
-            }
-          })
-          .then(response => {
-            posts = response.data;
-            this.checkFavorites(posts, favourites);
-          })
-          .catch(err => {
-            console.log("ERROR retrieving 'post' details");
-            console.log(err);
-          });
+        if (favourites.length > 0) {
+          axios
+            .get(`/api/post/`, {
+              params: {
+                _id: favourites
+              }
+            })
+            .then(response => {
+              posts = response.data;
+              this.checkFavorites(posts, favourites);
+            })
+            .catch(err => {
+              console.log("ERROR retrieving 'post' details");
+              console.log(err);
+            });
+        } else {
+          this.checkFavorites(posts, favourites);
+        }
+        // get details of the favourite post
       })
       .catch(error => {
         // Response
