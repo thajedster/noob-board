@@ -1,7 +1,11 @@
 const User = require("../models/User");
 
 exports.findAll = (req, res) => {
-  User.find()
+  let filter = {};
+  if (req.query._id) {
+    filter = { _id: req.query._id };
+  }
+  User.find(filter)
     .then(data => {
       res.json(data);
     })

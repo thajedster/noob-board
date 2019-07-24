@@ -17,22 +17,24 @@ class CommentBox extends React.Component {
   }
 
   loadUser = () => {
-    this.props.comments.forEach(comment => {
-      axios.get("/api/user/" + comment.author).then(res => {
-        let users = [...this.state.users];
-        users.push({ id: res.data._id, userName: res.data.userName });
-        this.setState({ users });
+    const { comments } = this.props;
+    const usersArray = [...new Set(comments.map(comment => comment.author))];
+    axios
+      .get("/api/user", {
+        params: {
+          _id: usersArray
+        }
+      })
+      .then(res => {
+        this.setState({ users: res.data });
       });
-    });
   };
 
   matchUser = author => {
     const { users } = this.state;
-    const index = users.findIndex(user => user.id === author);
-    if (index > -1) {
-      return users[index].userName;
-    } else {
-      return "";
+    const foundUser = users.find(user => user._id === author);
+    if (foundUser) {
+      return foundUser.userName;
     }
   };
 

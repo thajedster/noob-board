@@ -13,7 +13,7 @@ function ensureAuthenticated(req, res, next) {
 
 module.exports = app => {
   // User
-  app.get("/api/user", ensureAuthenticated, (req, res) => {
+  app.get("/api/user", (req, res) => {
     if (req.query.userName) {
       user.findByName(req, res);
     } else {
