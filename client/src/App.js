@@ -37,7 +37,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar updateState={this.updateState} loggedIn={loggedIn} />
+          <Navbar updateState={this.updateState} loggedIn={loggedIn} userId={userId} />
           <div className="container-fluid">
             <Switch>
               <Route
