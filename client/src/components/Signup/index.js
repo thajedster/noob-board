@@ -23,7 +23,6 @@ class Signup extends React.Component {
     this.setState({ error: "" });
     event.preventDefault();
     const { updateState, history } = this.props;
-    console.log("SIGN UP");
     axios
       .post("/signup", {
         email: this.state.email,
@@ -42,8 +41,6 @@ class Signup extends React.Component {
             error: "The email address is already registered"
           });
         }
-        //TODO: error handling
-        //create handle for email with no @ (regex)
         console.log(err.response);
       });
   };
