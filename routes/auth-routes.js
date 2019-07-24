@@ -14,7 +14,7 @@ module.exports = (app, passport) => {
       } else {
         //userName was found and is therefore aleady registered
         if (doc) {
-          res.status(500).send("Email is already registered");
+          res.status(409).send("Email is already registered");
           //userName was not found and can proceed with registation
         } else {
           const record = new User();
