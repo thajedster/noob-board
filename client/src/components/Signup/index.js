@@ -20,8 +20,10 @@ class Signup extends React.Component {
   };
 
   handleSubmit = event => {
+    this.setState({ error: "" });
     event.preventDefault();
     const { updateState, history } = this.props;
+    console.log("SIGN UP");
     axios
       .post("/signup", {
         email: this.state.email,
@@ -34,10 +36,15 @@ class Signup extends React.Component {
         updateState({ loggedIn: true, userId: res.data._id });
         history.push("/");
       })
-      .catch(function(err) {
+      .catch(err => {
+        if (err.response.status === 409) {
+          return this.setState({
+            error: "The email address is already registered"
+          });
+        }
         //TODO: error handling
         //create handle for email with no @ (regex)
-        console.log(err);
+        console.log(err.response);
       });
   };
 
@@ -45,6 +52,13 @@ class Signup extends React.Component {
     return (
       <div className="row">
         <div className="col-sm-10 col-md-6 mx-auto">
+          {this.state.error ? (
+            <div className="text-center">
+              <p className="bg-danger text-white">{this.state.error}</p>
+            </div>
+          ) : (
+            <div />
+          )}
           <h2 className="my-4">Sign Up Now!</h2>
           <form onSubmit={this.handleSubmit}>
             <input
