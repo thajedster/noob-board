@@ -38,7 +38,7 @@ class Login extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      <div className="row">
+      <div className="row pt-3">
         <div className="col-sm-10 col-md-6 mx-auto" id="login">
           {this.state.hasError ? (
             <div className="text-center">
@@ -47,8 +47,8 @@ class Login extends Component {
           ) : (
             <div />
           )}
-          <h1>Login Here!</h1>
-          <form className="text-left" onSubmit={this.handleSubmit}>
+          <h2>Login Here!</h2>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input
                 type="email"

@@ -65,7 +65,7 @@ class Form extends Component {
     const { title, body } = this.state;
     return (
       <div className="row pt-3">
-        <div className="col-12 col-md-8 col-lg-6 text-center mx-auto">
+        <div className="col-12 col-md-8 col-lg-6 mx-auto">
           <h2>Ask a Question!</h2>
           <form onSubmit={this.handleFormSubmit}>
             <div className="form-group">
