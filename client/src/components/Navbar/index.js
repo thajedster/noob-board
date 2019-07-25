@@ -87,16 +87,16 @@ export default class Navbar extends Component {
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
-              <Link to="/signup">
-                <button className="btn btn-primary ml-2" data-toggle="collapse" data-target=".navbar-collapse.show">
-                  Sign Up
-                </button>
-              </Link>
-              <Link to="/login">
-                <button className="btn btn-primary ml-2" data-toggle="collapse" data-target=".navbar-collapse.show">
-                  Sign In
-                </button>
-              </Link>
+              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link to="/signup" className="nav-link">
+                  <button className="btn btn-primary">Sign Up</button>
+                </Link>
+              </li>
+              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link to="/login" className="nav-link">
+                  <button className="btn btn-primary">Sign In</button>
+                </Link>
+              </li>
             </div>
           )}
         </div>
