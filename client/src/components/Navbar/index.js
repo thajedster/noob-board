@@ -80,6 +80,11 @@ export default class Navbar extends Component {
                       Favourites
                     </NavLink>
                   </li>
+                  <li data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <NavLink to="/password" className="dropdown-item">
+                      Change Password
+                    </NavLink>
+                  </li>
                   <div className="dropdown-divider border-secondary" />
                   <Logout updateState={updateState} />
                 </div>

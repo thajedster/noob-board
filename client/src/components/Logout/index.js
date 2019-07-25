@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import auth from "../../utils/auth";
 
 class Logout extends Component {
   handleClick = e => {
+    const { updateState, history } = this.props;
     auth
       .logout()
       .then(res => {
-        this.props.updateState({ loggedIn: false, userId: null });
+        updateState({ loggedIn: false, userId: null });
         console.log("Logged out");
+        history.push("/login");
       })
       .catch(err => {
         console.log(err);
@@ -28,4 +31,4 @@ class Logout extends Component {
   }
 }
 
-export default Logout;
+export default withRouter(Logout);
