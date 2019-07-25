@@ -47,12 +47,10 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-6 mx-auto">
+      <div className="row pt-3">
+        <div className="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
           {this.state.error ? (
-            <div className="text-center">
-              <p className="bg-danger text-white">{this.state.error}</p>
-            </div>
+            <div className="alert alert-danger bg-danger text-white text-center">{this.state.error}</div>
           ) : (
             <div />
           )}
@@ -62,7 +60,7 @@ class Signup extends React.Component {
               type="text"
               name="firstName"
               placeholder="First Name"
-              className="form-control my-4"
+              className="form-control my-4 custom-bg-secondary border-secondary"
               onChange={this.handleChange}
               value={this.state.firstName}
               required
@@ -71,7 +69,7 @@ class Signup extends React.Component {
               type="text"
               name="lastName"
               placeholder="Last Name"
-              className="form-control my-4"
+              className="form-control my-4 custom-bg-secondary border-secondary"
               onChange={this.handleChange}
               value={this.state.lastName}
               required
@@ -80,7 +78,7 @@ class Signup extends React.Component {
               type="text"
               name="userName"
               placeholder="Username"
-              className="form-control my-4"
+              className="form-control my-4 custom-bg-secondary border-secondary"
               onChange={this.handleChange}
               value={this.state.userName}
               required
@@ -89,7 +87,7 @@ class Signup extends React.Component {
               type="email"
               name="email"
               placeholder="E-mail"
-              className="form-control my-4"
+              className="form-control my-4 custom-bg-secondary border-secondary"
               onChange={this.handleChange}
               value={this.state.email}
               required
@@ -98,7 +96,7 @@ class Signup extends React.Component {
               type="password"
               name="password"
               placeholder="Password"
-              className="form-control my-4"
+              className="form-control my-4 custom-bg-secondary border-secondary"
               onChange={this.handleChange}
               value={this.state.password}
               minLength="5"
