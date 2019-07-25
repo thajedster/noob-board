@@ -7,7 +7,8 @@ class Password extends Component {
     newPassword: "",
     confirmNewPassword: "",
     hasError: false,
-    errorMessage: ""
+    errorMessage: "",
+    successful: false
   };
 
   handleChange = event => {
@@ -21,7 +22,7 @@ class Password extends Component {
     const { oldPassword, newPassword, confirmNewPassword } = this.state;
     const { userId } = this.props;
 
-    this.setState({ hasError: false });
+    this.setState({ hasError: false, successful: false });
     event.preventDefault();
     //check the new password inputs
     if (newPassword !== confirmNewPassword) {
@@ -42,7 +43,7 @@ class Password extends Component {
     axios
       .put("/api/user/password", data)
       .then(response => {
-        console.log(response);
+        this.setState({ successful: true });
       })
       .catch(error => {
         if (error.response.status === 401) {
@@ -57,12 +58,15 @@ class Password extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-6 mx-auto">
+      <div className="row pt-3">
+        <div className="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
           {this.state.hasError ? (
-            <div className="text-center">
-              <p className="bg-danger text-white">{this.state.errorMessage}</p>
-            </div>
+            <div className="alert alert-danger bg-danger text-white text-center">{this.state.errorMessage}</div>
+          ) : (
+            <div />
+          )}
+          {this.state.successful ? (
+            <div className="alert alert-success bg-success text-white text-center">Your password has been changed.</div>
           ) : (
             <div />
           )}
@@ -82,6 +86,7 @@ class Password extends Component {
               onChange={this.handleChange}
               className="form-control my-4"
               placeholder="Your new password"
+              minLength="5"
               required
             />
             <input
@@ -90,6 +95,7 @@ class Password extends Component {
               onChange={this.handleChange}
               className="form-control my-4"
               placeholder="Confirm your new password"
+              minLength="5"
               required
             />
             <input type="submit" value="Change Password" className="btn btn-primary" />
