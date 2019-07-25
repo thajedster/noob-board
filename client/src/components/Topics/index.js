@@ -14,7 +14,11 @@ function Topics(props) {
     <div className="row pt-3">
       <div className="col-12 col-md-8 mx-auto">
         <div id="topics-title" className="mb-3">
-          <h2>{props.pathname === "/favourites" ? "Your Favourites" : "Hot Topics"}</h2>
+          {props.topics.length ? (
+            <h2>{props.pathname === "/favourites" ? "Your Favourites" : "Hot Topics"}</h2>
+          ) : (
+            <h2>You have no favourites</h2>
+          )}
         </div>
         <div id="top-topics">
           {props.topics.map(item => (
