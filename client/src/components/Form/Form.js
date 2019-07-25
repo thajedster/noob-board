@@ -82,7 +82,7 @@ class Form extends Component {
             <div className="form-group">
               <textarea
                 id="newPostBody"
-                className="form-control form-control custom-bg-secondary border-secondary"
+                className="form-control custom-bg-secondary border-secondary"
                 value={body}
                 name="body"
                 onChange={this.handleInputChange}
