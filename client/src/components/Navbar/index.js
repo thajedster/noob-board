@@ -9,14 +9,29 @@ export default class Navbar extends Component {
   state = {
     userName: "Guest"
   };
-  componentDidMount() {
-    const { userId = null } = this.props;
 
-    axios.get(`/api/user/${userId}`).then(({ data: { userName } }) => {
-      this.setState({
-        userName
+  componentDidMount() {
+    const { userId, loggedIn } = this.props;
+
+    if (loggedIn) {
+      axios.get(`/api/user/${userId}`).then(({ data: { userName } }) => {
+        this.setState({
+          userName
+        });
       });
-    });
+    }
+  }
+
+  componentDidUpdate(oldProps) {
+    const { userId } = this.props;
+
+    if (userId && oldProps.userId !== userId) {
+      axios.get(`/api/user/${userId}`).then(({ data: { userName } }) => {
+        this.setState({
+          userName
+        });
+      });
+    }
   }
 
   render() {
