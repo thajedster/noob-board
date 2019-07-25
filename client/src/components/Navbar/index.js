@@ -35,33 +35,27 @@ export default class Navbar extends Component {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbar-content">
-          {loggedIn ? (
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <NavLink exact to="/" className="nav-link">
-                  Home
-                </NavLink>
-              </li>
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <NavLink exact to="/" className="nav-link">
+                Home
+              </NavLink>
+            </li>
+            {loggedIn ? (
               <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <NavLink to="/question" className="nav-link">
                   Ask Question
                 </NavLink>
               </li>
-              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <NavLink to="/search" className="nav-link">
-                  Search for Post
-                </NavLink>
-              </li>
-            </ul>
-          ) : (
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <NavLink exact to="/" className="nav-link">
-                  Home
-                </NavLink>
-              </li>
-            </ul>
-          )}
+            ) : (
+              <li />
+            )}
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <NavLink to="/search" className="nav-link">
+                Search for Post
+              </NavLink>
+            </li>
+          </ul>
           {loggedIn ? (
             <div className="navbar-nav ml-auto">
               <div className="dropdown">
