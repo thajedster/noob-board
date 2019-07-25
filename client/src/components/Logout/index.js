@@ -17,7 +17,7 @@ class Logout extends Component {
   render() {
     return (
       <button
-        className="btn dropdown-item"
+        className="dropdown-item"
         onClick={this.handleClick}
         data-toggle="collapse"
         data-target=".navbar-collapse.show"

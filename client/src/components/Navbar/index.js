@@ -22,9 +22,6 @@ export default class Navbar extends Component {
   render() {
     const { updateState, loggedIn } = this.props;
     const { userName } = this.state;
-    const dropdownText = {
-      color: "#16181b"
-    };
 
     return (
       <nav className="navbar navbar-expand-sm navbar-dark fixed-top custom-bg-nav">
@@ -69,18 +66,21 @@ export default class Navbar extends Component {
                 >
                   {userName}
                 </button>
-                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <div
+                  className="dropdown-menu dropdown-menu-right custom-bg-secondary"
+                  aria-labelledby="dropdownMenuButton"
+                >
                   <li data-toggle="collapse" data-target=".navbar-collapse.show">
-                    <NavLink to="/profile" className="dropdown-item" style={dropdownText}>
+                    <NavLink to="/profile" className="dropdown-item">
                       Profile
                     </NavLink>
                   </li>
                   <li data-toggle="collapse" data-target=".navbar-collapse.show">
-                    <NavLink to="/favourites" className="dropdown-item" style={dropdownText}>
+                    <NavLink to="/favourites" className="dropdown-item">
                       Favourites
                     </NavLink>
                   </li>
-                  <div className="dropdown-divider" />
+                  <div className="dropdown-divider border-secondary" />
                   <Logout updateState={updateState} />
                 </div>
               </div>

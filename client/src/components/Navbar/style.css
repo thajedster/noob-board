@@ -4,10 +4,18 @@
 .nav-link {
   display: inline-block;
 }
-
 .dropdown-toggle:after {
-  content: none;
+  /*content: none;*/
+  vertical-align: middle;
 }
 #dropdownMenuButton:focus {
   box-shadow: none;
+}
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: var(--primary-bg);
+}
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--primary-nav);
 }
