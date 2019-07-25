@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default class Navbar extends Component {
   state = {
-    userName: "Unkown User Name"
+    userName: "Guest"
   };
   componentDidMount() {
     const { userId = null } = this.props;
@@ -22,12 +22,6 @@ export default class Navbar extends Component {
   render() {
     const { updateState, loggedIn } = this.props;
     const { userName } = this.state;
-    const userText = {
-      color: "rgb(141, 131, 137)"
-    };
-    const dropdownText = {
-      color: "#16181b"
-    };
 
     return (
       <nav className="navbar navbar-expand-sm navbar-dark fixed-top custom-bg-nav">
@@ -38,73 +32,71 @@ export default class Navbar extends Component {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbar-content">
-          {loggedIn ? (
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <NavLink exact to="/" className="nav-link">
-                  Home
-                </NavLink>
-              </li>
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <NavLink exact to="/" className="nav-link">
+                Home
+              </NavLink>
+            </li>
+            {loggedIn ? (
               <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <NavLink to="/question" className="nav-link">
                   Ask Question
                 </NavLink>
               </li>
-              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <NavLink to="/search" className="nav-link">
-                  Search for Post
-                </NavLink>
-              </li>
-            </ul>
-          ) : (
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <NavLink exact to="/" className="nav-link">
-                  Home
-                </NavLink>
-              </li>
-            </ul>
-          )}
+            ) : (
+              <li />
+            )}
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <NavLink to="/search" className="nav-link">
+                Search for Post
+              </NavLink>
+            </li>
+          </ul>
           {loggedIn ? (
-            <div className="dropdown">
-              <div
-                className="dropdown-toggle"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span style={userText}>{userName}</span>
-              </div>
-              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <li className="dropdown-item">
-                  <NavLink to="/profile" className="nav-link" style={dropdownText}>
-                    Profile
-                  </NavLink>
-                </li>
-                <li className="dropdown-item">
-                  <NavLink to="/favourites" className="nav-link" style={dropdownText}>
-                    Favourites
-                  </NavLink>
-                </li>
-                <hr />
-                <div className="dropdown-item text-center mb-2">
+            <div className="navbar-nav ml-auto">
+              <div className="dropdown">
+                <button
+                  className="btn dropdown-toggle nav-link"
+                  id="dropdownMenuButton"
+                  type="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {userName}
+                </button>
+                <div
+                  className="dropdown-menu dropdown-menu-right custom-bg-secondary"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <li data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <NavLink to="/profile" className="dropdown-item">
+                      Profile
+                    </NavLink>
+                  </li>
+                  <li data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <NavLink to="/favourites" className="dropdown-item">
+                      Favourites
+                    </NavLink>
+                  </li>
+                  <div className="dropdown-divider border-secondary" />
                   <Logout updateState={updateState} />
                 </div>
               </div>
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
-              <Link to="/signup">
-                <button className="btn btn-primary ml-2" data-toggle="collapse" data-target=".navbar-collapse.show">
-                  Sign Up
-                </button>
-              </Link>
-              <Link to="/login">
-                <button className="btn btn-primary ml-2" data-toggle="collapse" data-target=".navbar-collapse.show">
-                  Sign In
-                </button>
-              </Link>
+              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link to="/signup" className="nav-link">
+                  <button className="btn btn-primary">Sign Up</button>
+                </Link>
+              </li>
+              <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link to="/login" className="nav-link">
+                  <button className="btn btn-primary">Sign In</button>
+                </Link>
+              </li>
             </div>
           )}
         </div>
