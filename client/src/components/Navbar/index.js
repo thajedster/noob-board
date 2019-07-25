@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default class Navbar extends Component {
   state = {
-    userName: "Unkown User Name"
+    userName: "Guest"
   };
   componentDidMount() {
     const { userId = null } = this.props;
@@ -22,9 +22,6 @@ export default class Navbar extends Component {
   render() {
     const { updateState, loggedIn } = this.props;
     const { userName } = this.state;
-    const userText = {
-      color: "rgb(141, 131, 137)"
-    };
     const dropdownText = {
       color: "#16181b"
     };
@@ -66,29 +63,30 @@ export default class Navbar extends Component {
             </ul>
           )}
           {loggedIn ? (
-            <div className="dropdown">
-              <div
-                className="dropdown-toggle"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span style={userText}>{userName}</span>
-              </div>
-              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <li className="dropdown-item">
-                  <NavLink to="/profile" className="nav-link" style={dropdownText}>
-                    Profile
-                  </NavLink>
-                </li>
-                <li className="dropdown-item">
-                  <NavLink to="/favourites" className="nav-link" style={dropdownText}>
-                    Favourites
-                  </NavLink>
-                </li>
-                <hr />
-                <div className="dropdown-item text-center mb-2">
+            <div className="navbar-nav ml-auto">
+              <div className="dropdown">
+                <button
+                  className="btn dropdown-toggle nav-link"
+                  id="dropdownMenuButton"
+                  type="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {userName}
+                </button>
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  <li data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <NavLink to="/profile" className="dropdown-item" style={dropdownText}>
+                      Profile
+                    </NavLink>
+                  </li>
+                  <li data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <NavLink to="/favourites" className="dropdown-item" style={dropdownText}>
+                      Favourites
+                    </NavLink>
+                  </li>
+                  <div className="dropdown-divider" />
                   <Logout updateState={updateState} />
                 </div>
               </div>

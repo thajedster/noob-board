@@ -16,14 +16,14 @@ class Logout extends Component {
 
   render() {
     return (
-      <li
-        // className="btn btn-primary ml-2"
+      <button
+        className="btn dropdown-item"
         onClick={this.handleClick}
-        // data-toggle="collapse"
-        // data-target=".navbar-collapse.show"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
       >
         Sign Out
-      </li>
+      </button>
     );
   }
 }
