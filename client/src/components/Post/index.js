@@ -49,6 +49,19 @@ class Post extends Component {
     }
   };
 
+  deletePost = () => {
+    const { history } = this.props;
+    let id = this.props.match.params.id;
+    axios
+      .delete("/api/post/" + id)
+      .then(res => {
+        history.replace("/");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     const { _id: id, title, body, comments, createdAt, author } = this.state.post;
     const { loggedIn, userId, history } = this.props;
@@ -67,8 +80,8 @@ class Post extends Component {
                 <i className="fas fa-arrow-left" /> Go Back
               </button>
               {ownPost ? (
-                <div className="float-right">
-                  <button className="btn btn-danger" title="Delete Post">
+                <div id="post-actions" className="float-right">
+                  <button className="btn btn-danger" title="Delete Post" onClick={this.deletePost}>
                     <i className="fas fa-trash-alt" />
                   </button>
                 </div>
