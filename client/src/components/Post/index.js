@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Moment from "react-moment";
 import Markdown from "markdown-to-jsx";
+import TextareaAutosize from "react-autosize-textarea";
 import CommentForm from "../CommentForm";
 import CommentBox from "../CommentBox";
 
@@ -116,14 +117,14 @@ class Post extends Component {
                 </h6>
                 {isEditing ? (
                   <div id="post-edit" className="mt-2 mb-2">
-                    <textarea
+                    <TextareaAutosize
+                      rows={3}
                       id="editPostBody"
                       className="form-control custom-bg-secondary border-secondary mb-2"
                       value={postBody}
                       name="postBody"
                       onChange={this.handleInputChange}
                       type="text"
-                      required
                     />
                     <button className="btn btn-link text-decoration-none" title="Save Changes" onClick={this.savePost}>
                       <i className="far fa-save" /> Save

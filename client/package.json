@@ -8,6 +8,7 @@
     "markdown-to-jsx": "^6.10.2",
     "moment": "^2.24.0",
     "react": "^16.8.6",
+    "react-autosize-textarea": "^7.0.0",
     "react-clamp-lines": "^3.0.2",
     "react-dom": "^16.8.6",
     "react-moment": "^0.9.2",
