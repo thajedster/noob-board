@@ -7,7 +7,9 @@ import CommentBox from "../CommentBox";
 class Post extends Component {
   state = {
     post: { author: {} },
-    ownPost: false
+    ownPost: false,
+    isEditing: false,
+    postBody: ""
   };
 
   componentDidMount() {
@@ -42,6 +44,13 @@ class Post extends Component {
       });
   };
 
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
   isOwnPost = () => {
     const { author } = this.state.post;
     const { userId } = this.props;
@@ -63,10 +72,33 @@ class Post extends Component {
       });
   };
 
+  editPost = () => {
+    const { body } = this.state.post;
+    this.setState({ isEditing: true, postBody: body });
+  };
+
+  cancelPost = () => {
+    this.setState({ isEditing: false, postBody: "" });
+  };
+
+  savePost = () => {
+    let id = this.props.match.params.id;
+    const { postBody } = this.state;
+    axios
+      .put("/api/post/" + id, { body: postBody })
+      .then(res => {
+        this.loadPost();
+        this.setState({ isEditing: false, postBody: "" });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     const { _id: id, title, body, comments, createdAt, author } = this.state.post;
     const { loggedIn, userId, history } = this.props;
-    const { ownPost, error } = this.state;
+    const { ownPost, isEditing, postBody, error } = this.state;
     return (
       <div className="row pt-3">
         {error ? (
@@ -81,15 +113,43 @@ class Post extends Component {
                 <h6 className="text-muted">
                   by {author.userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
                 </h6>
-                <p>{body}</p>
+                {isEditing ? (
+                  <div id="post-edit" className="mt-2 mb-2">
+                    <textarea
+                      id="editPostBody"
+                      className="form-control custom-bg-secondary border-secondary mb-2"
+                      value={postBody}
+                      name="postBody"
+                      onChange={this.handleInputChange}
+                      type="text"
+                      required
+                    />
+                    <button className="btn btn-link text-decoration-none" title="Save Changes" onClick={this.savePost}>
+                      <i className="far fa-save" /> Save
+                    </button>
+                    <button
+                      className="btn btn-link text-decoration-none"
+                      title="Cancel Editing"
+                      onClick={this.cancelPost}
+                    >
+                      <i className="fas fa-times" /> Cancel
+                    </button>
+                  </div>
+                ) : (
+                  <p>{body}</p>
+                )}
                 <button className="btn btn-link pl-0 text-decoration-none" onClick={history.goBack}>
                   <i className="fas fa-chevron-left" /> Go Back
                 </button>
                 {ownPost ? (
                   <div id="post-actions" className="float-right">
-                    <button className="btn btn-link" title="Edit Post" onClick={this.editPost}>
-                      <i className="far fa-edit" />
-                    </button>
+                    {isEditing ? (
+                      <div />
+                    ) : (
+                      <button className="btn btn-link" title="Edit Post" onClick={this.editPost}>
+                        <i className="far fa-edit" />
+                      </button>
+                    )}
                     <button className="btn btn-link text-danger" title="Delete Post" onClick={this.deletePost}>
                       <i className="far fa-trash-alt" />
                     </button>
