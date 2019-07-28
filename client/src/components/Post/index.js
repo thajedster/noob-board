@@ -6,7 +6,8 @@ import CommentBox from "../CommentBox";
 
 class Post extends Component {
   state = {
-    post: { author: {} }
+    post: { author: {} },
+    ownPost: false
   };
 
   componentDidMount() {
@@ -21,6 +22,7 @@ class Post extends Component {
         this.setState({
           post: res.data
         });
+        this.isOwnPost();
       })
       .catch(error => {
         // Response
@@ -39,9 +41,18 @@ class Post extends Component {
       });
   };
 
+  isOwnPost = () => {
+    const { author } = this.state.post;
+    const { userId } = this.props;
+    if (author._id === userId) {
+      this.setState({ ownPost: true });
+    }
+  };
+
   render() {
     const { _id: id, title, body, comments, createdAt, author } = this.state.post;
     const { loggedIn, userId, history } = this.props;
+    const { ownPost } = this.state;
     return (
       <div className="row pt-3">
         <div className="col-12 col-md-8 mx-auto">
@@ -52,9 +63,18 @@ class Post extends Component {
                 by {author.userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
               </h6>
               <p>{body}</p>
-              <button className="btn" onClick={history.goBack}>
+              <button className="btn pl-0" onClick={history.goBack}>
                 <i className="fas fa-arrow-left" /> Go Back
               </button>
+              {ownPost ? (
+                <div className="float-right">
+                  <button className="btn btn-danger" title="Delete Post">
+                    <i className="fas fa-trash-alt" />
+                  </button>
+                </div>
+              ) : (
+                <div />
+              )}
             </div>
           </div>
           <hr />
