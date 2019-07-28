@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Moment from "react-moment";
+import Markdown from "markdown-to-jsx";
 import CommentForm from "../CommentForm";
 import CommentBox from "../CommentBox";
 
@@ -135,8 +136,12 @@ class Post extends Component {
                       <i className="fas fa-times" /> Cancel
                     </button>
                   </div>
+                ) : body ? (
+                  <div id="post-body" className="mb-3">
+                    <Markdown>{body}</Markdown>
+                  </div>
                 ) : (
-                  <p>{body}</p>
+                  <div />
                 )}
                 <button className="btn btn-link pl-0 text-decoration-none" onClick={history.goBack}>
                   <i className="fas fa-chevron-left" /> Go Back
