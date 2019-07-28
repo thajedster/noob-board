@@ -82,13 +82,16 @@ class Post extends Component {
                   by {author.userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
                 </h6>
                 <p>{body}</p>
-                <button className="btn pl-0" onClick={history.goBack}>
-                  <i className="fas fa-arrow-left" /> Go Back
+                <button className="btn btn-link pl-0 text-decoration-none" onClick={history.goBack}>
+                  <i className="fas fa-chevron-left" /> Go Back
                 </button>
                 {ownPost ? (
                   <div id="post-actions" className="float-right">
-                    <button className="btn btn-danger" title="Delete Post" onClick={this.deletePost}>
-                      <i className="fas fa-trash-alt" />
+                    <button className="btn btn-link" title="Edit Post" onClick={this.editPost}>
+                      <i className="far fa-edit" />
+                    </button>
+                    <button className="btn btn-link text-danger" title="Delete Post" onClick={this.deletePost}>
+                      <i className="far fa-trash-alt" />
                     </button>
                   </div>
                 ) : (
