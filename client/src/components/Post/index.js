@@ -28,6 +28,7 @@ class Post extends Component {
         // Response
         if (error.response) {
           if (error.response.status === 401) return window.location.replace("/login");
+          else if (error.response.status === 404) return this.setState({ error: "404 Post not Found" });
           console.log("error.response");
           console.log(error);
           // Request
@@ -65,35 +66,41 @@ class Post extends Component {
   render() {
     const { _id: id, title, body, comments, createdAt, author } = this.state.post;
     const { loggedIn, userId, history } = this.props;
-    const { ownPost } = this.state;
+    const { ownPost, error } = this.state;
     return (
       <div className="row pt-3">
-        <div className="col-12 col-md-8 mx-auto">
-          <div id="post" className="card custom-bg-secondary">
-            <div className="card-body">
-              <h2>{title}</h2>
-              <h6 className="text-muted">
-                by {author.userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
-              </h6>
-              <p>{body}</p>
-              <button className="btn pl-0" onClick={history.goBack}>
-                <i className="fas fa-arrow-left" /> Go Back
-              </button>
-              {ownPost ? (
-                <div id="post-actions" className="float-right">
-                  <button className="btn btn-danger" title="Delete Post" onClick={this.deletePost}>
-                    <i className="fas fa-trash-alt" />
-                  </button>
-                </div>
-              ) : (
-                <div />
-              )}
-            </div>
+        {error ? (
+          <div className="col-12 col-md-8 mx-auto">
+            <div className="alert alert-danger bg-danger text-white text-center">{error}</div>
           </div>
-          <hr />
-          {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
-          {comments ? <CommentBox comments={comments} /> : <div />}
-        </div>
+        ) : (
+          <div className="col-12 col-md-8 mx-auto">
+            <div id="post" className="card custom-bg-secondary">
+              <div className="card-body">
+                <h2>{title}</h2>
+                <h6 className="text-muted">
+                  by {author.userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
+                </h6>
+                <p>{body}</p>
+                <button className="btn pl-0" onClick={history.goBack}>
+                  <i className="fas fa-arrow-left" /> Go Back
+                </button>
+                {ownPost ? (
+                  <div id="post-actions" className="float-right">
+                    <button className="btn btn-danger" title="Delete Post" onClick={this.deletePost}>
+                      <i className="fas fa-trash-alt" />
+                    </button>
+                  </div>
+                ) : (
+                  <div />
+                )}
+              </div>
+            </div>
+            <hr />
+            {loggedIn ? <CommentForm postId={id} userId={userId} refresh={this.loadPost} /> : <div />}
+            {comments ? <CommentBox comments={comments} /> : <div />}
+          </div>
+        )}
       </div>
     );
   }
