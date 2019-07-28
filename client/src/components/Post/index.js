@@ -5,6 +5,7 @@ import Markdown from "markdown-to-jsx";
 import TextareaAutosize from "react-autosize-textarea";
 import CommentForm from "../CommentForm";
 import CommentBox from "../CommentBox";
+import "./style.css";
 
 class Post extends Component {
   state = {
