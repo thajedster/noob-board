@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require("helmet");
 const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
@@ -8,6 +9,7 @@ const logger = require("morgan");
 require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 const app = express();
+app.use(helmet());
 
 const db = require("./models");
 // connect to the mongodb installation
