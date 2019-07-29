@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Moment from "react-moment";
+import Markdown from "markdown-to-jsx";
+import TextareaAutosize from "react-autosize-textarea";
 import CommentForm from "../CommentForm";
 import CommentBox from "../CommentBox";
+import "./style.css";
 
 class Post extends Component {
   state = {
     post: { author: {} },
-    ownPost: false
+    ownPost: false,
+    isEditing: false,
+    postBody: ""
   };
 
   componentDidMount() {
@@ -42,6 +47,13 @@ class Post extends Component {
       });
   };
 
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
   isOwnPost = () => {
     const { author } = this.state.post;
     const { userId } = this.props;
@@ -63,10 +75,33 @@ class Post extends Component {
       });
   };
 
+  editPost = () => {
+    const { body } = this.state.post;
+    this.setState({ isEditing: true, postBody: body });
+  };
+
+  clearPost = () => {
+    this.setState({ isEditing: false, postBody: "" });
+  };
+
+  savePost = () => {
+    let id = this.props.match.params.id;
+    const { postBody } = this.state;
+    axios
+      .put("/api/post/" + id, { body: postBody })
+      .then(res => {
+        this.loadPost();
+        this.clearPost();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     const { _id: id, title, body, comments, createdAt, author } = this.state.post;
     const { loggedIn, userId, history } = this.props;
-    const { ownPost, error } = this.state;
+    const { ownPost, isEditing, postBody, error } = this.state;
     return (
       <div className="row pt-3">
         {error ? (
@@ -81,14 +116,49 @@ class Post extends Component {
                 <h6 className="text-muted">
                   by {author.userName} at <Moment format="dddd, MMMM Do YYYY, h:mm a">{createdAt}</Moment>
                 </h6>
-                <p>{body}</p>
-                <button className="btn pl-0" onClick={history.goBack}>
-                  <i className="fas fa-arrow-left" /> Go Back
+                {isEditing ? (
+                  <div id="post-edit" className="mt-2 mb-2">
+                    <TextareaAutosize
+                      rows={3}
+                      id="editPostBody"
+                      className="form-control custom-bg-secondary border-secondary mb-2"
+                      value={postBody}
+                      name="postBody"
+                      onChange={this.handleInputChange}
+                      type="text"
+                    />
+                    <button className="btn btn-link text-decoration-none" title="Save Changes" onClick={this.savePost}>
+                      <i className="far fa-save" /> Save
+                    </button>
+                    <button
+                      className="btn btn-link text-decoration-none"
+                      title="Cancel Editing"
+                      onClick={this.clearPost}
+                    >
+                      <i className="fas fa-times" /> Cancel
+                    </button>
+                  </div>
+                ) : body ? (
+                  <div id="post-body" className="mb-3">
+                    <Markdown>{body}</Markdown>
+                  </div>
+                ) : (
+                  <div />
+                )}
+                <button className="btn btn-link pl-0 text-decoration-none" onClick={history.goBack}>
+                  <i className="fas fa-chevron-left" /> Go Back
                 </button>
                 {ownPost ? (
                   <div id="post-actions" className="float-right">
-                    <button className="btn btn-danger" title="Delete Post" onClick={this.deletePost}>
-                      <i className="fas fa-trash-alt" />
+                    {isEditing ? (
+                      <div />
+                    ) : (
+                      <button className="btn btn-link" title="Edit Post" onClick={this.editPost}>
+                        <i className="far fa-edit" />
+                      </button>
+                    )}
+                    <button className="btn btn-link text-danger" title="Delete Post" onClick={this.deletePost}>
+                      <i className="far fa-trash-alt" />
                     </button>
                   </div>
                 ) : (
