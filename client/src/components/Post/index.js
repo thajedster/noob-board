@@ -80,7 +80,7 @@ class Post extends Component {
     this.setState({ isEditing: true, postBody: body });
   };
 
-  cancelPost = () => {
+  clearPost = () => {
     this.setState({ isEditing: false, postBody: "" });
   };
 
@@ -91,7 +91,7 @@ class Post extends Component {
       .put("/api/post/" + id, { body: postBody })
       .then(res => {
         this.loadPost();
-        this.setState({ isEditing: false, postBody: "" });
+        this.clearPost();
       })
       .catch(err => {
         console.log(err);
@@ -133,7 +133,7 @@ class Post extends Component {
                     <button
                       className="btn btn-link text-decoration-none"
                       title="Cancel Editing"
-                      onClick={this.cancelPost}
+                      onClick={this.clearPost}
                     >
                       <i className="fas fa-times" /> Cancel
                     </button>
