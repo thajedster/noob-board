@@ -16,18 +16,31 @@ class CommentBox extends React.Component {
     this.loadUser();
   }
 
+  componentDidUpdate(oldProps) {
+    const { comments } = this.props;
+    if (comments && oldProps.comments.length !== comments.length) {
+      this.loadUser();
+    }
+  }
+
   loadUser = () => {
     const { comments } = this.props;
+    const { users } = this.state;
     const usersArray = [...new Set(comments.map(comment => comment.author))];
-    axios
-      .get("/api/user", {
-        params: {
-          _id: usersArray
-        }
-      })
-      .then(res => {
-        this.setState({ users: res.data });
-      });
+    if (usersArray.length !== users.length) {
+      axios
+        .get("/api/user", {
+          params: {
+            _id: usersArray
+          }
+        })
+        .then(res => {
+          this.setState({ users: res.data });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 
   matchUser = author => {
