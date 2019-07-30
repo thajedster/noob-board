@@ -1,4 +1,5 @@
 const Comment = require("../models/Comment");
+const sendNotification = require("../email/nodemailer");
 
 exports.findAll = (req, res) => {
   Comment.find()
@@ -31,6 +32,7 @@ exports.findById = (req, res) => {
 exports.create = (req, res) => {
   Comment.create(req.body)
     .then(data => {
+      sendNotification(req);
       res.json(data);
     })
     .catch(err => {
