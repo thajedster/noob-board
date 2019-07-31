@@ -23,5 +23,6 @@ A community for new developers to ask and answer questions, share ideas, and hel
 - Fontawesome
 - Heroku
 - Git
+- Trello for project management
 
 Link: https://noob-board.herokuapp.com/
